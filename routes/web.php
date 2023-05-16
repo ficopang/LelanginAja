@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,9 @@ Route::get('/product/{id}', function () {
 Route::get('/product/{id}/send', function () {
     return view('product.send');
 })->name('product.send');
+
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
 
 
 Route::get('/cart', function () {

@@ -37,8 +37,9 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="add-product">
                                 <h3>Add Product</h3>
-                                <form>
-                                    <div class="mb-3">
+                                <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
+                                @csrf    
+                                <div class="mb-3">
                                         <label for="product-name" class="form-label">Product Name</label>
                                         <input type="text" class="form-control" id="product-name" name="product-name"
                                             required>
@@ -47,10 +48,10 @@
                                         <label for="category-select" class="form-label">Select a Category</label>
                                         <select class="form-select" id="category-select" name="category">
                                             <option selected disabled>Select a category</option>
-                                            <option value="electronics">Electronics</option>
-                                            <option value="clothing">Clothing</option>
-                                            <option value="home">Home</option>
-                                            <option value="beauty">Beauty</option>
+                                            <option value="1">Electronics</option>
+                                            <option value="2">Clothing</option>
+                                            <option value="3">Home</option>
+                                            <option value="4">Beauty</option>
                                         </select>
                                     </div>
                                     <div class="mb-3">
@@ -60,12 +61,12 @@
                                     <div class="mb-3">
                                         <label for="starting-price" class="form-label">Starting Price</label>
                                         <input type="number" class="form-control" id="starting-price" name="starting-price"
-                                            required>
+                                            required step="1000">
                                     </div>
                                     <div class="mb-3">
                                         <label for="min-bid-increment" class="form-label">Minimum Bid Increment</label>
                                         <input type="number" class="form-control" id="min-bid-increment"
-                                            name="min-bid-increment" required>
+                                            name="min-bid-increment" required step="1000">
                                     </div>
                                     <div class="mb-3">
                                         <label for="product-image" class="form-label">Product Image</label>
@@ -82,16 +83,12 @@
                                         <input type="datetime-local" class="form-control" id="end-time" name="end-time"
                                             required>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="product-status" class="form-label">Product Status</label>
-                                        <select class="form-select" id="product-status" name="product-status" required>
-                                            <option value="open">Open</option>
-                                            <option value="closed">Closed</option>
-                                        </select>
-                                    </div>
+                                    
                                     <button type="submit" class="btn btn-primary">Add Product</button>
                                 </form>
                             </div>
+
+
                             <div class="tab-pane fade" id="view-products">
                                 <h3>View Product List</h3>
                                 <div class="my-items">
