@@ -13,14 +13,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        //     'password' => 'password',
+        //     'address' => 'jalan ... xxx',
+        //     'phone_number' => '0812323213'
+        // ]);
 
-        \App\Models\User::factory()->create([
-            'first_name' => 'depan',
-            'last_name' => 'belakang',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'address' => 'jalan ... xxx',
-            'phone_number' => '0812323213'
-        ]);
+        $this->call(UserSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(ProductReportSeeder::class);
     }
 }

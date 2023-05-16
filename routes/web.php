@@ -1,5 +1,7 @@
 <?php
-
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +64,9 @@ Route::get('/product/{id}/send', function () {
     return view('product.send');
 })->name('product.send');
 
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+
 
 Route::get('/cart', function () {
     return view('product.cart');
@@ -70,10 +75,8 @@ Route::get('/checkout', function () {
     return view('product.checkout');
 })->name('checkout');
 
+Route::get('/account/chat', [ChatController::class, 'openChatpage'])->name('account.chat');
 
-Route::get('/account/chat', function () {
-    return view('account.chat');
-})->name('account.chat');
 Route::get('/account/edit', function () {
     return view('account.edit');
 })->name('account.edit');
@@ -87,3 +90,5 @@ Route::get('/account/withdraw', function () {
 Route::get('/report', function () {
     return view('product.report');
 })->name('report');
+
+Route::post('/report', [ReportController::class, 'submitReport'])->name('report');

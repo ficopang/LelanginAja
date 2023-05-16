@@ -21,7 +21,7 @@
                                         <div class="msg-search">
                                             <input type="text" class="form-control" id="inlineFormInputGroup"
                                                 placeholder="Search" aria-label="search">
-                                            <a class="add" href="#"><img class="img-fluid"
+                                            <a class="add" href={{  }}><img class="img-fluid"
                                                     src="https://mehedihtml.com/chatbox/assets/img/add.svg"
                                                     alt="add"></a>
                                         </div>
@@ -30,12 +30,7 @@
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link active" id="Open-tab" data-bs-toggle="tab"
                                                     data-bs-target="#Open" type="button" role="tab"
-                                                    aria-controls="Open" aria-selected="true">Open</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="Closed-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#Closed" type="button" role="tab"
-                                                    aria-controls="Closed" aria-selected="false">Closed</button>
+                                                    aria-controls="Open" aria-selected="true">Chats</button>
                                             </li>
                                         </ul>
                                     </div>
