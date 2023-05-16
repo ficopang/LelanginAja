@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -83,3 +84,5 @@ Route::get('/account/withdraw', function () {
 Route::get('/report', function () {
     return view('product.report');
 })->name('report');
+
+Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
