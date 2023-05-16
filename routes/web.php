@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -67,10 +68,8 @@ Route::get('/checkout', function () {
     return view('product.checkout');
 })->name('checkout');
 
+Route::get('/account/chat', [ChatController::class, 'openChatpage'])->name('account.chat');
 
-Route::get('/account/chat', function () {
-    return view('account.chat');
-})->name('account.chat');
 Route::get('/account/edit', function () {
     return view('account.edit');
 })->name('account.edit');
