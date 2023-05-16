@@ -47,4 +47,34 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProductReport::class);
     }
+
+    public function withdrawHistories(): HasMany
+    {
+        return $this->hasMany(WithdrawHistory::class);
+    }
+
+    public function bids(): HasMany
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function sentChats()
+    {
+        return $this->hasMany(Chat::class, 'sender_id');
+    }
+
+    public function receivedChats()
+    {
+        return $this->hasMany(Chat::class, 'receiver_id');
+    }
 }
