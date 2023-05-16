@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
                 'last_name' => $faker->lastName(),
                 'email' => $faker->unique()->safeEmail,
                 'email_verified_at' => now(),
+                'balance' => 1000000,
                 'password' => Hash::make('password'),
                 'address' => $faker->address,
                 'phone_number' => $faker->phoneNumber,
