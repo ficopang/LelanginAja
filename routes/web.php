@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\ProductController;
+=======
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ChatController;
+>>>>>>> 9aa6ff4a3d18751cce14df609b6c6def3730fd04
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,10 +75,8 @@ Route::get('/checkout', function () {
     return view('product.checkout');
 })->name('checkout');
 
+Route::get('/account/chat', [ChatController::class, 'openChatpage'])->name('account.chat');
 
-Route::get('/account/chat', function () {
-    return view('account.chat');
-})->name('account.chat');
 Route::get('/account/edit', function () {
     return view('account.edit');
 })->name('account.edit');
@@ -87,3 +90,5 @@ Route::get('/account/withdraw', function () {
 Route::get('/report', function () {
     return view('product.report');
 })->name('report');
+
+Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
