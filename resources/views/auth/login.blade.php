@@ -8,7 +8,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
-                    <form class="card login-form" method="post">
+                    <form class="card login-form" method="post" action="/login">
+                        @csrf
                         <div class="card-body">
                             <div class="title">
                                 <h3>Login Now</h3>
@@ -32,11 +33,11 @@
                             </div>
                             <div class="form-group input-group">
                                 <label for="reg-fn">Email</label>
-                                <input class="form-control" type="email" id="reg-email" required>
+                                <input class="form-control" type="email" id="reg-email" name="email" required>
                             </div>
                             <div class="form-group input-group">
                                 <label for="reg-fn">Password</label>
-                                <input class="form-control" type="password" id="reg-pass" required>
+                                <input class="form-control" type="password" id="reg-pass" name="password" required>
                             </div>
                             <div class="d-flex flex-wrap justify-content-between bottom-content">
                                 <div class="form-check">

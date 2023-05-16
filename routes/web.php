@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
     return view('welcome');
-});
+})->middleware('auth');
 Route::get('/', [UserController::class, 'showUsers']);
 
 Route::get('/', function () {
@@ -38,6 +39,9 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
+Route::post('/login', [AuthController::class, 'customLogin']);
+Route::post('/register', [AuthController::class, 'customRegistration']);
+Route::get('/logout', [AuthController::class, 'signOut']);
 
 Route::get('/product', function () {
     return view('product.product-grids');
