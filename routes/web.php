@@ -47,9 +47,7 @@ Route::get('/product', function () {
 Route::get('/product/list', function () {
     return view('product.product-list');
 })->name('product.list');
-Route::get('/product/manage', function () {
-    return view('product.manage');
-})->name('product.manage');
+Route::get('/product/manage', [ProductController::class, 'index'])->name('product.manage');
 Route::get('/product/{id}/send', function () {
     return view('product.send');
 })->name('product.send');
@@ -61,6 +59,7 @@ Route::get('/product/{id}/send', function () {
 })->name('product.send');
 
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
 
 
 

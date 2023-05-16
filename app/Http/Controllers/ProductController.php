@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     //
+
+    public function index()
+    {
+        $products = Product::all();
+        return view('product.manage', compact('products'));
+    }
+
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -19,7 +27,7 @@ class ProductController extends Controller
             'product-image' => 'required|image',
             'start-time' => 'required|date',
             'end-time' => 'required|date',
-           
+
         ]);
 
         // Store the product in the database
