@@ -8,7 +8,20 @@
         <div class="card">
             <div class="card-body">
                 <h1>Withdraw Money</h1>
-                <form>
+                <br/>
+                {{-- menampilkan error validasi --}}
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <br/>
+                <form method="post" action="/account/withdraw">
+                    @csrf
                     <div class="mb-3">
                         <label for="amount" class="form-label">Withdrawal Amount</label>
                         <div class="input-group">

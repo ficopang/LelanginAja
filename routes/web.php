@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,3 +87,4 @@ Route::get('/report', function () {
 })->name('report');
 
 Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
+Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
