@@ -112,10 +112,10 @@
 
 
                                     @foreach($products as $product)
-                                        <div class="single-item-list" data-bs-toggle="collapse"
-                                            data-bs-target="#product-details-{{ $product->id }}" class="accordion-toggle">
+                                        <div class="single-item-list">
                                             <div class="row align-items-center">
-                                                <div class="col-lg-5 col-md-5 col-12">
+                                                <div class="col-lg-5 col-md-5 col-12"  data-bs-toggle="collapse"
+                                                data-bs-target="#product-details-{{ $product->id }}" class="accordion-toggle">
                                                     <div class="item-image">
                                                         <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
                                                         <div class="content">
@@ -130,12 +130,30 @@
                                                 <div class="col-lg-2 col-md-2 col-12">
                                                     <p>{{ $product->end_time }}</p>
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-12 align-right">
+
+                                                {{-- <div class="col-lg-3 col-md-3 col-12 align-right">
                                                     <ul class="action-btn">
                                                         <li><a href="javascript:void(0)"><i class="lni lni-pencil"></i></a></li>
                                                         <li><a href="javascript:void(0)"><i class="lni lni-trash-can"></i></a></li>
                                                     </ul>
+                                                </div> --}}
+
+                                                <div class="col-lg-3 col-md-3 col-12 align-right">
+                                                    <ul class="action-btn">
+                                                        {{-- <li><a href="{{ route('products.edit', $product->id) }}"><i class="lni lni-pencil"></i></a></li> --}}
+
+                                                        <li><a href="{{ route('products.edit', $product->id) }}"><i class="lni lni-pencil"></i></a></li>
+
+                                                        <li>
+                                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-link"><i class="lni lni-trash-can"></i></button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
                                                 </div>
+
                                             </div>
                                         </div>
                                         <div class="collapse" id="product-details-{{ $product->id }}">
@@ -149,7 +167,7 @@
                                                     <li>Image: <img src="{{ $product->image_url }}" alt="{{ $product->name }}" width="100"></li>
                                                     <li>Start Time: {{ $product->start_time }}</li>
                                                     <li>End Time: {{ $product->end_time }}</li>
-                                                    <li>Status: {{ $product->status }}</li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -157,8 +175,8 @@
 
                                     <div class="pagination left">
                                         <ul class="pagination-list">
-                                            <li><a href="javascript:void(0)">1</a></li>
-                                            <li class="active"><a href="javascript:void(0)">2</a></li>
+                                            <li class="active"><a href="javascript:void(0)">1</a></li>
+                                            <li><a href="javascript:void(0)">2</a></li>
                                             <li><a href="javascript:void(0)">3</a></li>
                                             <li><a href="javascript:void(0)">4</a></li>
                                             <li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a>
