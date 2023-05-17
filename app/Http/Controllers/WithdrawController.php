@@ -18,4 +18,9 @@ class WithdrawController extends Controller
         $user->save();
         return redirect()->back()->withMessage("Withdrawal success!");
     }
+
+    public function index(){
+        $users = User::find(1);
+        return view('withdraw',['users'=>$users]);
+    }
 }

@@ -88,3 +88,4 @@ Route::get('/report', function () {
 
 Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
 Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
+Route::get('/account/withdraw',[WithdrawController::class, 'index']);

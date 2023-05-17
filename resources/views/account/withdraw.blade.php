@@ -35,32 +35,38 @@
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-body">
-                <h2>Account Balance</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Transaction Date</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>May 1, 2023</td>
-                            <td>Deposit</td>
-                            <td>$1000.00</td>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2"><strong>Total</strong></td>
-                            <td>$1000.00</td>
-                        </tr>
-                    </tfoot>
-                </table>
+        <form action="/withdraw" method="GET">
+            @csrf
+            <div class="card">
+                <div class="card-body">
+                    <h2>Account Balance</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Transaction Date</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                            <tr>
+                            <td>{{ $user->created_at }}</td>
+                            <td>{{ $user->description }}</td>
+                            <td>{{ $user->amount }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"><strong>Total</strong></td>
+                                <td>$1000.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <!-- End edit account Area -->
 @endsection
