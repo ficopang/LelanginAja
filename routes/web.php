@@ -63,7 +63,11 @@ Route::get('/product/{id}/send', function () {
 })->name('product.send');
 
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-
+Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/manage', [ProductController::class, 'manage'])->name('products.manage');
 
 
 

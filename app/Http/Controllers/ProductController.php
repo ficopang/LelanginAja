@@ -30,7 +30,7 @@ class ProductController extends Controller
 
         ]);
 
-        // Store the product in the database
+
         $products = new Product();
         $products->name = $validatedData['product-name'];
         $products->user_id = 1;
@@ -38,7 +38,8 @@ class ProductController extends Controller
         $products->description = $validatedData['product-description'];
         $products->starting_price = $validatedData['starting-price'];
         $products->min_bid_increment = $validatedData['min-bid-increment'];
-        // Handle product image upload and store the image URL in the database
+
+
         if ($request->hasFile('product-image')) {
             $image = $request->file('product-image');
             $imagePath = $image->store('product-images', 'public');
@@ -47,11 +48,49 @@ class ProductController extends Controller
         $products->start_time = $validatedData['start-time'];
         $products->end_time = $validatedData['end-time'];
 
-
-        // Save the product
         $products->save();
 
-        // Redirect the user or return a response
+
         return redirect()->back()->with('success', 'Product added successfully!');
     }
+
+
+    public function update(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $product->name = $request->input('product-name');
+        $product->category_id = $request->input('category');
+        $product->description = $request->input('product-description');
+        $product->starting_price = $request->input('starting-price');
+        $product->min_bid_increment = $request->input('min-bid-increment');
+
+        $product->save();
+
+
+        return redirect()->route('products.index', $product->id);
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect()->route('products.index')->with('error', 'Product not found');
+        }
+
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully');
+    }
+
+
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('product.edit', compact('product'));
+    }
+
+
+
 }
