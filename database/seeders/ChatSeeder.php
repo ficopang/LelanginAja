@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class ChatSeeder extends Seeder
 {
@@ -13,24 +16,20 @@ class ChatSeeder extends Seeder
      */
     public function run(): void
     {
-        $chats = [
-            [
-                'sender_id' => 1,
-                'receiver_id' => 2,
-                'text' => 'Hello, how are you?',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'sender_id' => 2,
-                'receiver_id' => 1,
-                'text' => 'I am good, thank you!',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Add more chat messages as needed
-        ];
+        $faker = Faker::create();
 
-        DB::table('chats')->insert($chats);
+        // Create dummy chats
+        for ($i = 0; $i < 10; $i++) {
+            $sender = User::inRandomOrder()->first();
+            $receiver = User::where('id', '!=', $sender->id)->inRandomOrder()->first();
+
+            Chat::create([
+                'sender_id' => $sender->id,
+                'receiver_id' => $receiver->id,
+                'text' => $faker->sentence(),
+                'created_at' => $faker->dateTimeThisMonth(),
+                'updated_at' => $faker->dateTimeThisMonth(),
+            ]);
+        }
     }
 }
