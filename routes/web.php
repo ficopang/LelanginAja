@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return view('welcome');
 })->middleware('auth');
-Route::get('/', [UserController::class, 'showUsers']);
 
 Route::get('/', function () {
     return view('index');
@@ -67,18 +66,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
-  Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
-Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
-Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/products/manage', [ProductController::class, 'manage'])->name('products.manage');
-  
+    Route::get('/products/manage', [ProductController::class, 'manage'])->name('products.manage');
+
     Route::get('/cart', function () {
         return view('product.cart');
     })->name('cart');
@@ -87,6 +86,10 @@ Route::get('/products/manage', [ProductController::class, 'manage'])->name('prod
     })->name('checkout');
 
     Route::get('/account/chat', [ChatController::class, 'openChatpage'])->name('account.chat');
+
+    Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatpage'])->name('account.chat');
+
+    Route::post('/account/chat/{chat_id}', [ChatController::class, 'postChat']);
 
     Route::get('/account/edit', function () {
         return view('account.edit');

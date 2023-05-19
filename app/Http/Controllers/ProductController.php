@@ -15,7 +15,6 @@ class ProductController extends Controller
         return view('product.manage', compact('products'));
     }
 
-
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -27,9 +26,7 @@ class ProductController extends Controller
             'product-image' => 'required|image',
             'start-time' => 'required|date',
             'end-time' => 'required|date',
-
         ]);
-
 
         $products = new Product();
         $products->name = $validatedData['product-name'];
@@ -38,7 +35,6 @@ class ProductController extends Controller
         $products->description = $validatedData['product-description'];
         $products->starting_price = $validatedData['starting-price'];
         $products->min_bid_increment = $validatedData['min-bid-increment'];
-
 
         if ($request->hasFile('product-image')) {
             $image = $request->file('product-image');
@@ -49,7 +45,6 @@ class ProductController extends Controller
         $products->end_time = $validatedData['end-time'];
 
         $products->save();
-
 
         return redirect()->back()->with('success', 'Product added successfully!');
     }
@@ -66,7 +61,6 @@ class ProductController extends Controller
         $product->min_bid_increment = $request->input('min-bid-increment');
 
         $product->save();
-
 
         return redirect()->route('products.index', $product->id);
     }
@@ -90,7 +84,4 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return view('product.edit', compact('product'));
     }
-
-
-
 }
