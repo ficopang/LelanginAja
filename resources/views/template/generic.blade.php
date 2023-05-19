@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" />
     @yield('custom-header')
+    @vite([])
 </head>
 
 <body>
