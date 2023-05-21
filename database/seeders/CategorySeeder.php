@@ -18,6 +18,12 @@ class CategorySeeder extends Seeder
             ['name' => 'Fashion'],
             ['name' => 'Home & Garden'],
             ['name' => 'Sports'],
+            ['name' => 'accessories'],
+            ['name' => 'Televisions'],
+            ['name' => 'sunglass'],
+            ['name' => 'watch'],
+            ['name' => 'Home Audio & Theater'],
+            ['name' => 'Computers & Tablets'],
             ['name' => 'Books'],
             // Add more categories as needed
         ];

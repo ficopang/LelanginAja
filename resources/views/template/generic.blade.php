@@ -50,7 +50,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-3 col-7">
                         <!-- Start Header Logo -->
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="/">
                             <img src="{{ asset('assets/images/logo/logo.svg') }}" alt="Logo">
                         </a>
                         <!-- End Header Logo -->
@@ -64,11 +64,9 @@
                                     <div class="select-position">
                                         <select id="select1">
                                             <option selected>All</option>
-                                            <option value="1">option 01</option>
-                                            <option value="2">option 02</option>
-                                            <option value="3">option 03</option>
-                                            <option value="4">option 04</option>
-                                            <option value="5">option 05</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -85,75 +83,104 @@
                     </div>
                     <div class="col-lg-4 col-md-2 col-5">
                         <div class="middle-right-area">
-                            <div class="nav-hotline">
-                                <div class="row">
-                                    <div class="col">
-                                        <i class="lni lni-user"></i>
-                                        Hello, name
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="navbar-cart">
-                                <div class="wishlist">
-                                    <a href="javascript:void(0)">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items">0</span>
-                                    </a>
-                                </div>
-                                <div class="cart-items">
-                                    <a href="javascript:void(0)" class="main-btn">
-                                        <i class="lni lni-cart"></i>
-                                        <span class="total-items">2</span>
-                                    </a>
-                                    <!-- Shopping Item -->
-                                    <div class="shopping-item">
-                                        <div class="dropdown-cart-header">
-                                            <span>2 Items</span>
-                                            <a href="cart.html">View Cart</a>
-                                        </div>
-                                        <ul class="shopping-list">
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove" title="Remove this item"><i
-                                                        class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="{{ asset('assets/images/header/cart-items/item1.jpg') }}"
-                                                            alt="#"></a>
-                                                </div>
-
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">
-                                                            Apple Watch Series 6</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove" title="Remove this item"><i
-                                                        class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="{{ asset('assets/images/header/cart-items/item2.jpg') }}"
-                                                            alt="#"></a>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">Wi-Fi Smart Camera</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="bottom">
-                                            <div class="total">
-                                                <span>Total</span>
-                                                <span class="total-amount">$134.00</span>
-                                            </div>
+                            @auth
+                                <div class="nav-hotline">
+                                    <div class="row">
+                                        <div class="col">
                                             <div class="button">
-                                                <a href="checkout.html" class="btn animate">Checkout</a>
+                                                <a href="/logout" class="btn">Logout</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--/ End Shopping Item -->
                                 </div>
-                            </div>
+                                <div class="navbar-cart">
+                                    <div class="cart-items">
+                                        <a href="javascript:void(0)" class="main-btn">
+                                            <i class="lni lni-eye"></i>
+                                            <span class="total-items">{{ auth()->user()->watchlist->count() }}</span>
+                                        </a>
+                                        <!-- Shopping Item -->
+                                        <div class="shopping-item">
+                                            <ul class="shopping-list">
+                                                @foreach (auth()->user()->watchlist as $watchlistItem)
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="remove"
+                                                            title="Remove this item"><i class="lni lni-close"></i></a>
+                                                        <div class="cart-img-head">
+                                                            <a class="cart-img"
+                                                                href="/product/{{ $watchlistItem->product->id }}"><img
+                                                                    src="{{ asset('storage/' . $watchlistItem->product->image_url) }}"
+                                                                    alt="#"></a>
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <h4><a href="/product/{{ $watchlistItem->product->id }}">
+                                                                    {{ $watchlistItem->product->name }}</a></h4>
+                                                            <p class="quantity">Budi - <span
+                                                                    class="amount">Rp{{ $watchlistItem->product->getTotalBidAmount() }}</span>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <!--/ End Shopping Item -->
+                                    </div>
+                                    <div class="cart-items">
+                                        <a href="javascript:void(0)" class="main-btn">
+                                            <i class="lni lni-cart"></i>
+                                            <span class="total-items">{{ auth()->user()->wonProducts->count() }}</span>
+                                        </a>
+                                        <!-- Shopping Item -->
+                                        <div class="shopping-item">
+                                            <div class="dropdown-cart-header">
+                                                <span>{{ auth()->user()->wonProducts->count() }} Items</span>
+                                                <a href="/cart">View Cart</a>
+                                            </div>
+                                            <ul class="shopping-list">
+                                                @foreach (auth()->user()->wonProducts as $product)
+                                                    <li>
+                                                        <div class="cart-img-head">
+                                                            <a class="cart-img" href="/product/{{ $product->id }}"><img
+                                                                    src="{{ asset('storage/' . $product->image_url) }}"
+                                                                    alt="#"></a>
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <h4><a href="/product/{{ $product->id }}">
+                                                                    {{ $product->name }}</a></h4>
+                                                            <p class="quantity"><span class="amount">Rp
+                                                                    {{ $product->getTotalBidAmount() }}</span>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                            <div class="bottom">
+                                                <div class="total">
+                                                    <span>Total</span>
+                                                    <span class="total-amount">$134.00</span>
+                                                </div>
+                                                <div class="button">
+                                                    <a href="/checkout" class="btn animate">Checkout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/ End Shopping Item -->
+                                    </div>
+                                </div>
+                            @else
+                                <div class="nav-hotline">
+                                    <div class="button">
+                                        <a href="/register" class="btn">Register</a>
+                                    </div>
+                                </div>
+                                <div class="navbar-cart">
+                                    <div class="button">
+                                        <a href="/login" class="btn">Login</a>
+                                    </div>
+                                </div>
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -169,31 +196,9 @@
                         <div class="mega-category-menu">
                             <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                             <ul class="sub-category">
-                                <li><a href="product-grids.html">Electronics <i class="lni lni-chevron-right"></i></a>
-                                    <ul class="inner-sub-category">
-                                        <li><a href="product-grids.html">Digital Cameras</a></li>
-                                        <li><a href="product-grids.html">Camcorders</a></li>
-                                        <li><a href="product-grids.html">Camera Drones</a></li>
-                                        <li><a href="product-grids.html">Smart Watches</a></li>
-                                        <li><a href="product-grids.html">Headphones</a></li>
-                                        <li><a href="product-grids.html">MP3 Players</a></li>
-                                        <li><a href="product-grids.html">Microphones</a></li>
-                                        <li><a href="product-grids.html">Chargers</a></li>
-                                        <li><a href="product-grids.html">Batteries</a></li>
-                                        <li><a href="product-grids.html">Cables & Adapters</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="product-grids.html">accessories</a></li>
-                                <li><a href="product-grids.html">Televisions</a></li>
-                                <li><a href="product-grids.html">best selling</a></li>
-                                <li><a href="product-grids.html">top 100 offer</a></li>
-                                <li><a href="product-grids.html">sunglass</a></li>
-                                <li><a href="product-grids.html">watch</a></li>
-                                <li><a href="product-grids.html">man’s product</a></li>
-                                <li><a href="product-grids.html">Home Audio & Theater</a></li>
-                                <li><a href="product-grids.html">Computers & Tablets </a></li>
-                                <li><a href="product-grids.html">Video Games </a></li>
-                                <li><a href="product-grids.html">Home Appliances </a></li>
+                                @foreach ($categories as $category)
+                                    <li><a href="/search/{{ $category->id }}">{{ $category->name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                         <!-- End Mega Category Menu -->
@@ -209,51 +214,26 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a href="index.html" aria-label="Toggle navigation">Home</a>
+                                        <a href="/" aria-label="Toggle navigation">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dd-menu active collapsed" href="javascript:void(0)"
-                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-2"
-                                            aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">Pages</a>
-                                        <ul class="sub-menu collapse" id="submenu-1-2">
-                                            <li class="nav-item active"><a href="about-us.html">About Us</a></li>
-                                            <li class="nav-item"><a href="faq.html">Faq</a></li>
-                                            <li class="nav-item"><a href="login.html">Login</a></li>
-                                            <li class="nav-item"><a href="register.html">Register</a></li>
-                                            <li class="nav-item"><a href="mail-success.html">Mail Success</a></li>
-                                            <li class="nav-item"><a href="404.html">404 Error</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="dd-menu collapsed" href="javascript:void(0)"
-                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
-                                            aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">Shop</a>
-                                        <ul class="sub-menu collapse" id="submenu-1-3">
-                                            <li class="nav-item"><a href="product-grids.html">Shop Grid</a></li>
-                                            <li class="nav-item"><a href="product-list.html">Shop List</a></li>
-                                            <li class="nav-item"><a href="product-details.html">shop Single</a></li>
-                                            <li class="nav-item"><a href="cart.html">Cart</a></li>
-                                            <li class="nav-item"><a href="checkout.html">Checkout</a></li>
-                                        </ul>
+                                        <a href="/products" aria-label="Toggle navigation">My Products</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-1-4"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">Blog</a>
+                                            aria-label="Toggle navigation">Account</a>
                                         <ul class="sub-menu collapse" id="submenu-1-4">
-                                            <li class="nav-item"><a href="blog-grid-sidebar.html">Blog Grid
-                                                    Sidebar</a>
-                                            </li>
-                                            <li class="nav-item"><a href="blog-single.html">Blog Single</a></li>
-                                            <li class="nav-item"><a href="blog-single-sidebar.html">Blog Single
-                                                    Sibebar</a></li>
+                                            <li class="nav-item"><a href="/account/edit">Account Settings</a></li>
+                                            <li class="nav-item"><a href="/account/chat">Chats</a></li>
+                                            <li class="nav-item"><a href="/account/withdraw">Withdraw</a></li>
+                                            <li class="nav-item"><a href="/cart">Cart</a></li>
+                                            <li class="nav-item"><a href="/account/transaction">Transaction</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>
+                                        <a href="/contact" aria-label="Toggle navigation">Contact Us</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
@@ -362,7 +342,7 @@
                                     <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
                                 </ul>
                                 <p class="mail">
-                                    <a href="mailto:support@shopgrids.com">support@shopgrids.com</a>
+                                    <a href="mailto:support@lelanginaja.com">support@lelanginaja.com</a>
                                 </p>
                             </div>
                             <!-- End Single Widget -->
@@ -395,11 +375,9 @@
                             <div class="single-footer f-link">
                                 <h3>Information</h3>
                                 <ul>
-                                    <li><a href="javascript:void(0)">About Us</a></li>
-                                    <li><a href="javascript:void(0)">Contact Us</a></li>
-                                    <li><a href="javascript:void(0)">Downloads</a></li>
-                                    <li><a href="javascript:void(0)">Sitemap</a></li>
-                                    <li><a href="javascript:void(0)">FAQs Page</a></li>
+                                    <li><a href="/about">About Us</a></li>
+                                    <li><a href="/contact">Contact Us</a></li>
+                                    <li><a href="/faq">FAQs Page</a></li>
                                 </ul>
                             </div>
                             <!-- End Single Widget -->
@@ -407,13 +385,11 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer f-link">
-                                <h3>Shop Departments</h3>
+                                <h3>Categories</h3>
                                 <ul>
-                                    <li><a href="javascript:void(0)">Computers & Accessories</a></li>
-                                    <li><a href="javascript:void(0)">Smartphones & Tablets</a></li>
-                                    <li><a href="javascript:void(0)">TV, Video & Audio</a></li>
-                                    <li><a href="javascript:void(0)">Cameras, Photo & Video</a></li>
-                                    <li><a href="javascript:void(0)">Headphones</a></li>
+                                    @for ($i = 1; isset($categories[$i]) && $i <= 5; $i++)
+                                        <li><a href="{{ $categories[$i]->id }}">{{ $categories[$i]->name }}</a></li>
+                                    @endfor
                                 </ul>
                             </div>
                             <!-- End Single Widget -->
