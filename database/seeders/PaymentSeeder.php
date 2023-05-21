@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class PaymentSeeder extends Seeder
 {
@@ -13,26 +14,25 @@ class PaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        $payments = [
-            [
-                'transaction_id' => 1,
-                'payment_method' => 'Credit Card',
-                'amount' => 1000,
-                'status' => 'Completed',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'transaction_id' => 2,
-                'payment_method' => 'PayPal',
-                'amount' => 1500,
-                'status' => 'Completed',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Add more payments as needed
-        ];
+        $faker = Faker::create();
 
-        DB::table('payments')->insert($payments);
+        $transactions = DB::table('transactions')->pluck('id')->toArray();
+
+        $paymentMethods = ['Credit Card', 'PayPal', 'Bank Transfer'];
+
+        foreach ($transactions as $transactionId) {
+            $amount = $faker->numberBetween(100, 1000);
+            $status = $faker->randomElement(['paid', 'pending', 'failed']);
+            $paymentMethod = $faker->randomElement($paymentMethods);
+
+            DB::table('payments')->insert([
+                'transaction_id' => $transactionId,
+                'payment_method' => $paymentMethod,
+                'amount' => $amount,
+                'status' => $status,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

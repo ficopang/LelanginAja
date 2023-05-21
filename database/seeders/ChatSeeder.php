@@ -19,16 +19,23 @@ class ChatSeeder extends Seeder
         $faker = Faker::create();
 
         // Create dummy chats
-        for ($i = 0; $i < 10; $i++) {
-            $sender = User::inRandomOrder()->first();
-            $receiver = User::where('id', '!=', $sender->id)->inRandomOrder()->first();
+        $users = DB::table('users')->pluck('id')->toArray();
 
-            Chat::create([
-                'sender_id' => $sender->id,
-                'receiver_id' => $receiver->id,
-                'text' => $faker->sentence(),
-                'created_at' => $faker->dateTimeThisMonth(),
-                'updated_at' => $faker->dateTimeThisMonth(),
+        for ($i = 0; $i < 10; $i++) {
+            $senderId = $faker->randomElement($users);
+            $receiverId = $faker->randomElement($users);
+
+            // Make sure sender and receiver are different users
+            while ($senderId === $receiverId) {
+                $receiverId = $faker->randomElement($users);
+            }
+
+            DB::table('chats')->insert([
+                'sender_id' => $senderId,
+                'receiver_id' => $receiverId,
+                'text' => $faker->sentence,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
