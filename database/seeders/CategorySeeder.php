@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -18,10 +17,10 @@ class CategorySeeder extends Seeder
             ['name' => 'Fashion'],
             ['name' => 'Home & Garden'],
             ['name' => 'Sports'],
-            ['name' => 'accessories'],
+            ['name' => 'Accessories'],
             ['name' => 'Televisions'],
-            ['name' => 'sunglass'],
-            ['name' => 'watch'],
+            ['name' => 'Sunglass'],
+            ['name' => 'Watch'],
             ['name' => 'Home Audio & Theater'],
             ['name' => 'Computers & Tablets'],
             ['name' => 'Books'],

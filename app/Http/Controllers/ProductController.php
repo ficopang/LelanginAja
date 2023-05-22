@@ -26,7 +26,6 @@ class ProductController extends Controller
 
         $newArrivals = Product::orderBy('created_at', 'asc')->get();
 
-        // dd($newArrivals);
         return view('index', compact('carousel','categories', 'trendingProduct', 'specialOffer','bestSellers','topRated'));
     }
 
