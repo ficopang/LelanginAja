@@ -12,10 +12,10 @@
                     <div class="card-body">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#add-product" data-bs-toggle="pill">Add Product</a>
+                                <a class="nav-link active" href="#view-products" data-bs-toggle="pill">View Product List</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#view-products" data-bs-toggle="pill">View Product List</a>
+                                <a class="nav-link" href="#add-product" data-bs-toggle="pill">Add Product</a>
                             </li>
                         </ul>
                     </div>
@@ -35,11 +35,12 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="add-product">
+                            <div class="tab-pane fade" id="add-product">
                                 <h3>Add Product</h3>
+
                                 <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
-                                @csrf
-                                <div class="mb-3">
+                                    @csrf
+                                    <div class="mb-3">
                                         <label for="product-name" class="form-label">Product Name</label>
                                         <input type="text" class="form-control" id="product-name" name="product-name"
                                             required>
@@ -48,10 +49,11 @@
                                         <label for="category-select" class="form-label">Select a Category</label>
                                         <select class="form-select" id="category-select" name="category">
                                             <option selected disabled>Select a category</option>
-                                            <option value="1">Electronics</option>
-                                            <option value="2">Clothing</option>
-                                            <option value="3">Home</option>
-                                            <option value="4">Beauty</option>
+
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                     <div class="mb-3">
@@ -89,8 +91,15 @@
                             </div>
 
 
-                            <div class="tab-pane fade" id="view-products">
+                            <div class="tab-pane fade show active" id="view-products">
                                 <h3>View Product List</h3>
+
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+
                                 <div class="my-items">
 
                                     <div class="item-list-title">
@@ -111,15 +120,18 @@
                                     </div>
 
 
-                                    @foreach($products as $product)
+                                    @foreach ($products as $product)
                                         <div class="single-item-list">
                                             <div class="row align-items-center">
-                                                <div class="col-lg-5 col-md-5 col-12"  data-bs-toggle="collapse"
-                                                data-bs-target="#product-details-{{ $product->id }}" class="accordion-toggle">
+                                                <div class="col-lg-5 col-md-5 col-12" data-bs-toggle="collapse"
+                                                    data-bs-target="#product-details-{{ $product->id }}"
+                                                    class="accordion-toggle">
                                                     <div class="item-image">
-                                                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
+                                                        <img src="{{ asset('storage/' . $product->image_url) }}"
+                                                            alt="{{ $product->name }}" class="object-fit-cover">
                                                         <div class="content">
-                                                            <h3 class="title"><a href="javascript:void(0)">{{ $product->name }}</a></h3>
+                                                            <h3 class="title"><a
+                                                                    href="javascript:void(0)">{{ $product->name }}</a></h3>
                                                             <span class="price">${{ $product->starting_price }}</span>
                                                         </div>
                                                     </div>
@@ -142,13 +154,17 @@
                                                     <ul class="action-btn">
                                                         {{-- <li><a href="{{ route('products.edit', $product->id) }}"><i class="lni lni-pencil"></i></a></li> --}}
 
-                                                        <li><a href="{{ route('products.edit', $product->id) }}"><i class="lni lni-pencil"></i></a></li>
+                                                        <li><a href="{{ route('products.edit', $product->id) }}"><i
+                                                                    class="lni lni-pencil"></i></a></li>
 
                                                         <li>
-                                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                                            <form action="{{ route('products.destroy', $product->id) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('Are you sure you want to delete this product?')">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-link"><i class="lni lni-trash-can"></i></button>
+                                                                <button type="submit" class="btn btn-link"><i
+                                                                        class="lni lni-trash-can"></i></button>
                                                             </form>
                                                         </li>
                                                     </ul>
@@ -164,25 +180,55 @@
                                                     <li>Description: {{ $product->description }}</li>
                                                     <li>Starting Price: ${{ $product->starting_price }}</li>
                                                     <li>Min Bid Increment: ${{ $product->min_bid_increment }}</li>
-                                                    <li>Image: <img src="{{ $product->image_url }}" alt="{{ $product->name }}" width="100"></li>
+                                                    <li>Image: <img src="{{ asset('storage/' . $product->image_url) }}"
+                                                            alt="{{ $product->name }}" width="100"></li>
                                                     <li>Start Time: {{ $product->start_time }}</li>
                                                     <li>End Time: {{ $product->end_time }}</li>
 
                                                 </ul>
                                             </div>
                                         </div>
-                                        @endforeach
+                                    @endforeach
 
                                     <div class="pagination left">
                                         <ul class="pagination-list">
-                                            <li class="active"><a href="javascript:void(0)">1</a></li>
-                                            <li><a href="javascript:void(0)">2</a></li>
-                                            <li><a href="javascript:void(0)">3</a></li>
-                                            <li><a href="javascript:void(0)">4</a></li>
-                                            <li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a>
-                                            </li>
+                                            @if ($products->onFirstPage())
+                                                <!-- No previous page available -->
+                                                <li class="disabled">
+                                                    <span><i class="lni lni-chevron-left"></i></span>
+                                                </li>
+                                            @else
+                                                <!-- Previous page available -->
+                                                <li>
+                                                    <a href="{{ $products->previousPageUrl() }}">
+                                                        <i class="lni lni-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                            @endif
+
+                                            @foreach ($products->links()->elements[0] as $page => $url)
+                                                <li class="{{ $products->currentPage() == $page ? 'active' : '' }}">
+                                                    <a href="{{ $url }}">{{ $page }}</a>
+                                                </li>
+                                            @endforeach
+
+                                            @if ($products->hasMorePages())
+                                                <!-- Next page available -->
+                                                <li>
+                                                    <a href="{{ $products->nextPageUrl() }}">
+                                                        <i class="lni lni-chevron-right"></i>
+                                                    </a>
+                                                </li>
+                                            @else
+                                                <!-- No next page available -->
+                                                <li class="disabled">
+                                                    <span><i class="lni lni-chevron-right"></i></span>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
+
+
 
                                 </div>
                             </div>

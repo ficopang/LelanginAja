@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class TransactionSeeder extends Seeder
 {
@@ -13,28 +14,27 @@ class TransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        $transactions = [
-            [
-                'buyer_id' => 1,
-                'seller_id' => 2,
-                'product_id' => 1,
-                'final_price' => 1000,
-                'status' => 'Completed',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'buyer_id' => 2,
-                'seller_id' => 1,
-                'product_id' => 2,
-                'final_price' => 1500,
-                'status' => 'Completed',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Add more transactions as needed
-        ];
+        $faker = Faker::create();
 
-        DB::table('transactions')->insert($transactions);
+        $users = DB::table('users')->pluck('id')->toArray();
+        $products = DB::table('products')->pluck('id')->toArray();
+
+        for ($i = 0; $i < 10; $i++) {
+            $buyerId = $faker->randomElement($users);
+            $sellerId = $faker->randomElement($users);
+            $productId = $faker->randomElement($products);
+            $finalPrice = $faker->numberBetween(100, 1000);
+            $status = $faker->randomElement(['completed', 'pending', 'cancelled']);
+
+            DB::table('transactions')->insert([
+                'buyer_id' => $buyerId,
+                'seller_id' => $sellerId,
+                'product_id' => $productId,
+                'final_price' => $finalPrice,
+                'status' => $status,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

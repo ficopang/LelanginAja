@@ -15,8 +15,15 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             ['name' => 'Electronics'],
-            ['name' => 'Clothing'],
-            ['name' => 'Home and Kitchen'],
+            ['name' => 'Fashion'],
+            ['name' => 'Home & Garden'],
+            ['name' => 'Sports'],
+            ['name' => 'accessories'],
+            ['name' => 'Televisions'],
+            ['name' => 'sunglass'],
+            ['name' => 'watch'],
+            ['name' => 'Home Audio & Theater'],
+            ['name' => 'Computers & Tablets'],
             ['name' => 'Books'],
             // Add more categories as needed
         ];

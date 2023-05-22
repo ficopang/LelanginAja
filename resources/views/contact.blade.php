@@ -44,9 +44,9 @@
                                     <i class="lni lni-envelope"></i>
                                     <h3>Mail at</h3>
                                     <ul>
-                                        <li><a href="mailto:support@shopgrids.com">support@shopgrids.com</a>
+                                        <li><a href="mailto:support@lelanginaja.com">support@lelanginaja.com</a>
                                         </li>
-                                        <li><a href="mailto:career@shopgrids.com">career@shopgrids.com</a></li>
+                                        <li><a href="mailto:career@lelanginaja.com">career@lelanginaja.com</a></li>
                                     </ul>
                                 </div>
                                 <!-- End Single Info -->

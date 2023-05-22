@@ -19,11 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-})->middleware('auth');
-
-Route::get('/', [ProductController::class, 'showProduct'])->name('index');
+Route::get('/', function () {
+    return view('index');
+})->name('index');
 Route::get('/about', function () {
     return view('about-us');
 })->name('about-us');
@@ -64,17 +62,11 @@ Route::middleware(['auth'])->group(function () {
     })->name('product.send');
 
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-
     Route::get('/products/manage', [ProductController::class, 'manage'])->name('products.manage');
 
     Route::get('/cart', function () {
@@ -89,7 +81,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatPage'])->name('account.chat');
 
     Route::post('/account/chat/{chat_id}', [ChatController::class, 'postChat']);
-
+    Route::get('/account/', function () {
+        return view('account.edit');
+    })->name('account.edit');
     Route::get('/account/edit', function () {
         return view('account.edit');
     })->name('account.edit');

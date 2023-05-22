@@ -6,7 +6,6 @@ use App\Models\Bid;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -33,8 +32,9 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::all();
-        return view('product.manage', compact('products'));
+        $products = Product::paginate(2);
+        $categories = Category::all();
+        return view('product.manage', compact('products', 'categories'));
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class ProductController extends Controller
 
         $products = new Product();
         $products->name = $validatedData['product-name'];
-        $products->user_id = 1;
+        $products->user_id = auth()->id();
         $products->category_id = $validatedData['category'];
         $products->description = $validatedData['product-description'];
         $products->starting_price = $validatedData['starting-price'];
@@ -68,7 +68,9 @@ class ProductController extends Controller
 
         $products->save();
 
-        return redirect()->back()->with('success', 'Product added successfully!');
+        return redirect()->route('products.index')->with('success', 'Product added successfully');
+
+        //return redirect()->back()->with('success', 'Product added successfully!');
     }
 
 
@@ -76,11 +78,31 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
+        $validatedData = $request->validate([
+            'product-name' => 'required',
+            'category' => 'required',
+            'product-description' => 'required',
+            'starting-price' => 'required|numeric',
+            'min-bid-increment' => 'required|numeric',
+            'product-image' => 'required|image',
+            'start-time' => 'required|date',
+            'end-time' => 'required|date',
+        ]);
+
         $product->name = $request->input('product-name');
         $product->category_id = $request->input('category');
         $product->description = $request->input('product-description');
         $product->starting_price = $request->input('starting-price');
         $product->min_bid_increment = $request->input('min-bid-increment');
+
+        if ($request->hasFile('product-image')) {
+            $image = $request->file('product-image');
+            $imagePath = $image->store('product-images', 'public');
+            $product->image_url = $imagePath;
+        }
+        $product->start_time = $validatedData['start-time'];
+        $product->end_time = $validatedData['end-time'];
+
 
         $product->save();
 
@@ -104,6 +126,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('product.edit', compact('product'));
+        $categories = Category::all();
+        return view('product.edit', compact('product', 'categories'));
     }
 }
