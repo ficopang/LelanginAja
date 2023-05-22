@@ -33,5 +33,20 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
+
+        // dummy
+        DB::table('users')->insert([
+            'first_name' => $faker->firstName(),
+            'last_name' => $faker->lastName(),
+            'email' => "user@gmail.com",
+            'email_verified_at' => now(),
+            'balance' => 1000000,
+            'password' => Hash::make('admin123'),
+            'address' => $faker->address,
+            'phone_number' => $faker->phoneNumber,
+            'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

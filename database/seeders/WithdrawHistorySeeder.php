@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
-class ProductReportSeeder extends Seeder
+class WithdrawHistorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,13 +17,14 @@ class ProductReportSeeder extends Seeder
         $faker = Faker::create();
 
         $users = DB::table('users')->pluck('id')->toArray();
-        $products = DB::table('products')->pluck('id')->toArray();
 
         for ($i = 0; $i < 10; $i++) {
-            DB::table('product_reports')->insert([
-                'user_id' => $faker->randomElement($users),
-                'product_id' => $faker->randomElement($products),
-                'text' => $faker->sentence,
+            $userId = $faker->randomElement($users);
+
+            DB::table('withdraw_histories')->insert([
+                'user_id' => $userId,
+                'description' => $faker->sentence,
+                'amount' => $faker->numberBetween(1000, 10000),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

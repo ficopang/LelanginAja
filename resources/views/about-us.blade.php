@@ -17,15 +17,17 @@
                 <div class="col-lg-6 col-md-12 col-12">
                     <!-- content-1 start -->
                     <div class="content-right">
-                        <h2>ShopGrids - Your Trusted & Reliable Partner.</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id purus at risus
-                            pellentesque faucibus a quis eros. In eu fermentum leo. Integer ut eros lacus. Proin ut
-                            accumsan leo. Morbi vitae est eget dolor consequat aliquam eget quis dolor. Mauris rutrum
-                            fermentum erat, at euismod lorem pharetra nec. Duis erat lectus, ultrices euismod sagittis.
+                        <h2>LelanginAja - Bid, Win, Repeat.</h2>
+                        <p>LelanginAja is a dynamic auction marketplace where users can buy and sell products through
+                            engaging bidding experiences. Whether you want to upload your own items or place bids on
+                            exciting listings, our platform combines the convenience of a traditional marketplace with the
+                            thrill of competitive bidding. With a user-friendly interface and a wide range of categories,
+                            finding unique items and securing great deals has never been easier.
                         </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi aliquip ex ea commodo consequat.</p>
+                        <p>At LelanginAja, transparency and security are paramount. Real-time updates, detailed product
+                            descriptions, and fair auction practices ensure a trustworthy environment for all participants.
+                            Join us today to experience the excitement of bidding and discover a world of unique products.
+                            Start exploring, bidding, and winning at LelanginAja, the ultimate auction marketplace.</p>
                     </div>
                 </div>
             </div>
@@ -40,8 +42,8 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2 class="wow fadeInUp" data-wow-delay=".4s">Our Core Team</h2>
-                        <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
-                            Ipsum available, but the majority have suffered alteration in some form.</p>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">LelanginAja could be made because of highly
+                            professional team</p>
                     </div>
                 </div>
             </div>
@@ -54,14 +56,12 @@
                         </div>
                         <div class="content">
                             <div class="info">
-                                <h3>Grace Wright</h3>
-                                <h5>Founder, CEO</h5>
+                                <h3>Fico Pangestu</h3>
+                                <h5>Project Manager</h5>
                                 <ul class="social">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-instagram-original"></i></a>
                                     </li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
-                                    </li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -77,14 +77,12 @@
                         </div>
                         <div class="content">
                             <div class="info">
-                                <h3>Taylor Jackson</h3>
+                                <h3>Renaldo Furiady</h3>
                                 <h5>Financial Director</h5>
                                 <ul class="social">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-instagram-original"></i></a>
                                     </li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
-                                    </li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -100,14 +98,12 @@
                         </div>
                         <div class="content">
                             <div class="info">
-                                <h3>Quinton Cross</h3>
+                                <h3>Brian Giovanni</h3>
                                 <h5>Marketing Director</h5>
                                 <ul class="social">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-instagram-original"></i></a>
                                     </li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
-                                    </li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -123,14 +119,33 @@
                         </div>
                         <div class="content">
                             <div class="info">
-                                <h3>Liana Mullen</h3>
+                                <h3>Nelsen Gabriel</h3>
                                 <h5>Lead Designer</h5>
                                 <ul class="social">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-instagram-original"></i></a>
                                     </li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
                                     </li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Team -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Team -->
+                    <div class="single-team">
+                        <div class="image">
+                            <img src="https://via.placeholder.com/300x300" alt="#">
+                        </div>
+                        <div class="content">
+                            <div class="info">
+                                <h3>Kevin Priatna</h3>
+                                <h5>Backend Developer</h5>
+                                <ul class="social">
+                                    <li><a href="javascript:void(0)"><i class="lni lni-instagram-original"></i></a>
+                                    </li>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
                                     </li>
                                 </ul>
                             </div>

@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
@@ -26,5 +25,12 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(ProductReportSeeder::class);
+        $this->call(WithdrawHistorySeeder::class);
+        $this->call(BidSeeder::class);
+        $this->call(TransactionSeeder::class);
+        $this->call(PaymentSeeder::class);
+        $this->call(ShipmentSeeder::class);
+        $this->call(ChatSeeder::class);
+        $this->call(WatchlistSeeder::class);
     }
 }

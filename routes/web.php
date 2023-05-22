@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +19,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-Route::get('/', [UserController::class, 'showUsers']);
 
 Route::get('/', function () {
     return view('index');
@@ -40,52 +39,62 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
+Route::post('/login', [AuthController::class, 'customLogin']);
+Route::post('/register', [AuthController::class, 'customRegistration']);
 
-Route::get('/product', function () {
-    return view('product.product-grids');
-})->name('product.grids');
-Route::get('/product/list', function () {
-    return view('product.product-list');
-})->name('product.list');
-Route::get('/product/manage', function () {
-    return view('product.manage');
-})->name('product.manage');
-Route::get('/product/{id}/send', function () {
-    return view('product.send');
-})->name('product.send');
-Route::get('/product/{id}', function () {
-    return view('product.product-details');
-})->name('product.details');
-Route::get('/product/{id}/send', function () {
-    return view('product.send');
-})->name('product.send');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', [AuthController::class, 'signOut']);
 
+    Route::get('/product', function () {
+        return view('product.product-grids');
+    })->name('product.grids');
+    Route::get('/product/list', function () {
+        return view('product.product-list');
+    })->name('product.list');
+    Route::get('/product/manage', [ProductController::class, 'index'])->name('product.manage');
+    Route::get('/product/{id}/send', function () {
+        return view('product.send');
+    })->name('product.send');
+    Route::get('/product/{id}', function () {
+        return view('product.product-details');
+    })->name('product.details');
+    Route::get('/product/{id}/send', function () {
+        return view('product.send');
+    })->name('product.send');
 
-Route::get('/cart', function () {
-    return view('product.cart');
-})->name('cart');
-Route::get('/checkout', function () {
-    return view('product.checkout');
-})->name('checkout');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/manage', [ProductController::class, 'manage'])->name('products.manage');
 
+    Route::get('/cart', function () {
+        return view('product.cart');
+    })->name('cart');
+    Route::get('/checkout', function () {
+        return view('product.checkout');
+    })->name('checkout');
 
-Route::get('/account/chat', function () {
-    return view('account.chat');
-})->name('account.chat');
-Route::get('/account/edit', function () {
-    return view('account.edit');
-})->name('account.edit');
-Route::get('/account/transaction', function () {
-    return view('transaction.history');
-})->name('transaction.history');
-Route::get('/account/withdraw', function () {
-    return view('account.withdraw');
-})->name('account.withdraw');
+    Route::get('/account/chat', [ChatController::class, 'openChatPage'])->name('account.chat');
 
-Route::get('/report', function () {
-    return view('product.report');
-})->name('report');
+    Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatPage'])->name('account.chat');
 
-Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
-Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
-Route::get('/account/withdraw',[WithdrawController::class, 'index']);
+    Route::post('/account/chat/{chat_id}', [ChatController::class, 'postChat']);
+    Route::get('/account/', function () {
+        return view('account.edit');
+    })->name('account.edit');
+    Route::get('/account/edit', function () {
+        return view('account.edit');
+    })->name('account.edit');
+    Route::get('/account/transaction', [TransactionController::class, 'showTransactionHistory'])->name('transaction.history');
+
+    Route::get('/report', function () {
+        return view('product.report');
+    })->name('report');
+
+    Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
+    Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
+    Route::get('/account/withdraw',[WithdrawController::class, 'index']);
+});

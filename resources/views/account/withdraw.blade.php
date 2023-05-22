@@ -8,18 +8,18 @@
         <div class="card">
             <div class="card-body">
                 <h1>Withdraw Money</h1>
-                <br/>
+                <br />
                 {{-- menampilkan error validasi --}}
                 @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
-                <br/>
+                <br />
                 <form method="post" action="/account/withdraw">
                     @csrf
                     <div class="mb-3">
@@ -49,12 +49,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
-                            <tr>
-                            <td>{{ $user->created_at }}</td>
-                            <td>{{ $user->description }}</td>
-                            <td>{{ $user->amount }}</td>
-                            </tr>
+                            @foreach ($withdraws as $withdraw)
+                                <tr>
+                                    <td>{{ $withdraw->created_at }}</td>
+                                    <td>{{ $withdraw->description }}</td>
+                                    <td>{{ $withdraw->amount }}</td>
+                                </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
