@@ -91,9 +91,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/account/chat/{chat_id}', [ChatController::class, 'postChat']);
 
-    Route::get('/account/edit', function () {
-        return view('account.edit');
+    Route::get('/account/edit', [UserController::class, 'getUserData'])->name('account.edit');
+
+    Route::post('/account/edit', [UserController::class, 'updateUserData'])->name('account.edit');
+
+    Route::get('/account/edit/password', function () {
+        return redirect('/account/edit');
     })->name('account.edit');
+    Route::post('/account/edit/password', [UserController::class, 'updatePassword'])->name('account.edit');
+
+    Route::delete('/account/delete', [UserController::class, 'deleteAccount'])->name('account.delete');
+
     Route::get('/account/transaction', function () {
         return view('transaction.history');
     })->name('transaction.history');
