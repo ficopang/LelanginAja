@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class ProductReportSeeder extends Seeder
 {
@@ -13,24 +14,19 @@ class ProductReportSeeder extends Seeder
      */
     public function run(): void
     {
-        $reports = [
-            [
-                'user_id' => 1,
-                'product_id' => 1,
-                'text' => 'Report 1',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'user_id' => 2,
-                'product_id' => 2,
-                'text' => 'Report 2',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Add more reports as needed
-        ];
+        $faker = Faker::create();
 
-        DB::table('product_reports')->insert($reports);
+        $users = DB::table('users')->pluck('id')->toArray();
+        $products = DB::table('products')->pluck('id')->toArray();
+
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('product_reports')->insert([
+                'user_id' => $faker->randomElement($users),
+                'product_id' => $faker->randomElement($products),
+                'text' => $faker->sentence,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
