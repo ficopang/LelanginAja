@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,4 +103,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('report');
 
     Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
+
+    Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
+    Route::get('/account/withdraw',[WithdrawController::class, 'index']);
 });
