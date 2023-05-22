@@ -32,8 +32,18 @@ class Product extends Model
         return $this->hasOne(Transaction::class);
     }
 
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function getTotalBidAmount()
     {
         return $this->bids()->sum('price') + $this->starting_price;
+    }
+
+    public function undiscountedPrice()
+    {
+        return $this->starting_price * 2;
     }
 }

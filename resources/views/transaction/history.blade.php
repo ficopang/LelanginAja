@@ -41,12 +41,12 @@
                                     onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
                                 <div class="content">
                                     <h3 class="title"><a href="javascript:void(0)">{{ $tr->product->name }}</a></h3>
-                                    <span class="price">{{ "$".$tr->product->starting_price }}</span>
+                                    <span class="price">{{ "Rp".$tr->final_price }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>{{ "$".$tr->final_price }}</p>
+                            <p>{{ "Rp".$tr->final_price }}</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
                             <p>{{ $tr->created_at }}</p>
@@ -67,8 +67,8 @@
                         <ul>
                             <li>Name: {{ $tr->product->name }}</li>
                             <li>Description: {{ $tr->product->description }}</li>
-                            <li>Starting Price: {{ "$".$tr->product->starting_price }}</li>
-                            <li>Min Bid Increment: {{ "$".$tr->product->min_bid_increment }}</li>
+                            <li>Starting Price: {{ "Rp".$tr->product->starting_price }}</li>
+                            <li>Min Bid Increment: {{ "Rp".$tr->product->min_bid_increment }}</li>
                             <li>Image: <img src="product1.jpg" alt="Product 1" width="100"></li>
                             <li>Start Time: {{ $tr->product->start_time }}</li>
                             <li>End Time: {{ $tr->product->end_time }}</li>
