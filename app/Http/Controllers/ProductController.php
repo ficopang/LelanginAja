@@ -11,23 +11,25 @@ class ProductController extends Controller
 {
     public function showProduct()
     {
-        $carousel = Product::inRandomOrder()->limit(2)->get();
+        $carousel = Product::inRandomOrder()->limit(4)->get();
+        $smallBanner = Product::inRandomOrder()->limit(1)->get()->first();
 
         $categories = Category::all()->take(6);
 
         $trendingProduct = Product::withCount('bids')
             ->orderBy('bids_count', 'desc')
-            ->take(6)
+            ->take(8)
             ->get();
 
-        $specialOffer = Product::orderBy('start_time', 'asc')->get();
+        $specialOffer = Product::orderBy('start_time', 'asc')->limit(3)->get();
+        $banner = Product::inRandomOrder()->limit(1)->get()->first();
+        $offer = Product::inRandomOrder()->limit(1)->get()->first();
+
         $bestSellers = Product::inRandomOrder()->limit(3)->get();
+        $newArrivals = Product::orderBy('created_at', 'asc')->limit(3)->get();
         $topRated = Product::inRandomOrder()->limit(3)->get();
 
-        $newArrivals = Product::orderBy('created_at', 'asc')->get();
-
-        // dd($newArrivals);
-        return view('index', compact('carousel','categories', 'trendingProduct', 'specialOffer','bestSellers','topRated'));
+        return view('index', compact('carousel','smallBanner','categories', 'trendingProduct', 'specialOffer','banner','offer','bestSellers','newArrivals','topRated'));
     }
 
     public function index()
@@ -69,8 +71,6 @@ class ProductController extends Controller
         $products->save();
 
         return redirect()->route('products.index')->with('success', 'Product added successfully');
-
-        //return redirect()->back()->with('success', 'Product added successfully!');
     }
 
 

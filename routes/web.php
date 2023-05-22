@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WithdrawController;
@@ -20,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', [ProductController::class, 'showProduct'])->name('index');
 Route::get('/about', function () {
     return view('about-us');
 })->name('about-us');
@@ -78,7 +75,9 @@ Route::middleware(['auth'])->group(function () {
     })->name('checkout');
 
     Route::get('/account/chat', [ChatController::class, 'openChatPage'])->name('account.chat');
+
     Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatPage'])->name('account.chat');
+
     Route::post('/account/chat/{chat_id}', [ChatController::class, 'postChat']);
 
     Route::get('/account/', function () {
@@ -91,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('account.edit');
     Route::post('/account/edit/password', [UserController::class, 'updatePassword'])->name('account.edit');
     Route::delete('/account/delete', [UserController::class, 'deleteAccount'])->name('account.delete');
-    
+
     Route::get('/account/transaction', [TransactionController::class, 'showTransactionHistory'])->name('transaction.history');
 
     Route::get('/account/withdraw', function () {

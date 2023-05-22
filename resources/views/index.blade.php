@@ -16,42 +16,20 @@
                                 ">
                             <div class="content">
                                 <h2>
-                                    <span>Bid starting from {{ "$".$cr->min_bid_increment }}</span>
+                                    <span>Bid starting from {{ "Rp".$cr->min_bid_increment }}</span>
                                     {{ $cr->name }}
                                 </h2>
                                 <p>
                                     {{ $cr->description }}
                                 </p>
-                                <h3><span>Starting from</span>{{ "$".$cr->starting_price }}</h3>
+                                <h3><span>Starting from</span>{{ "Rp".$cr->starting_price }}</h3>
                                 <div class="button">
-                                    <a href="product-grids.html" class="btn">Shop Now</a>
+                                    <a href="/product/{{ $cr->id }}" class="btn">Shop Now</a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                         <!-- End Single Slider -->
-                        {{--
-                        <!-- Start Single Slider -->
-                        <div class="single-slider" style="
-                                background-image: url(https://via.placeholder.com/800x500);
-                                ">
-                            <div class="content">
-                                <h2>
-                                    <span>Big Sale Offer</span>
-                                    Get the Best Deal on CCTV Camera
-                                </h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    elit, sed do eiusmod tempor incididunt ut
-                                    labore dolore magna aliqua.
-                                </p>
-                                <h3><span>Combo Only:</span> $590.00</h3>
-                                <div class="button">
-                                    <a href="product-grids.html" class="btn">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Slider --> --}}
                     </div>
                     <!-- End Hero Slider -->
                 </div>
@@ -65,10 +43,10 @@
                             ">
                             <div class="content">
                                 <h2>
-                                    <span>New line required</span>
-                                    iPhone 12 Pro Max
+                                    <span>Bid starting from {{ "Rp".$smallBanner->min_bid_increment }}</span>
+                                    {{ $smallBanner->name }}
                                 </h2>
-                                <h3>$259.99</h3>
+                                <h3>{{ "Rp".$smallBanner->getTotalBidAmount() }}</h3>
                             </div>
                         </div>
                         <!-- End Small Banner -->
@@ -113,7 +91,6 @@
         </div>
         <div class="row">
             @foreach ($categories as $cat)
-            {{-- {{ dd($cat) }} --}}
             <div class="col-lg-4 col-md-6 col-12">
                 <!-- Start Single Category -->
                 <div class="single-category">
@@ -134,101 +111,6 @@
                 <!-- End Single Category -->
             </div>
             @endforeach
-            {{-- <div class="col-lg-4 col-md-6 col-12">
-                <!-- Start Single Category -->
-                <div class="single-category">
-                    <h3 class="heading">Desktop & Laptop</h3>
-                    <ul>
-                        <li>
-                            <a href="product-grids.html">Smart Television</a>
-                        </li>
-                        <li><a href="product-grids.html">QLED TV</a></li>
-                        <li><a href="product-grids.html">Audios</a></li>
-                        <li><a href="product-grids.html">Headphones</a></li>
-                        <li><a href="product-grids.html">View All</a></li>
-                    </ul>
-                    <div class="images">
-                        <img src="https://via.placeholder.com/180x180" alt="#" />
-                    </div>
-                </div>
-                <!-- End Single Category -->
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <!-- Start Single Category -->
-                <div class="single-category">
-                    <h3 class="heading">Cctv Camera</h3>
-                    <ul>
-                        <li>
-                            <a href="product-grids.html">Smart Television</a>
-                        </li>
-                        <li><a href="product-grids.html">QLED TV</a></li>
-                        <li><a href="product-grids.html">Audios</a></li>
-                        <li><a href="product-grids.html">Headphones</a></li>
-                        <li><a href="product-grids.html">View All</a></li>
-                    </ul>
-                    <div class="images">
-                        <img src="https://via.placeholder.com/180x180" alt="#" />
-                    </div>
-                </div>
-                <!-- End Single Category -->
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <!-- Start Single Category -->
-                <div class="single-category">
-                    <h3 class="heading">Dslr Camera</h3>
-                    <ul>
-                        <li>
-                            <a href="product-grids.html">Smart Television</a>
-                        </li>
-                        <li><a href="product-grids.html">QLED TV</a></li>
-                        <li><a href="product-grids.html">Audios</a></li>
-                        <li><a href="product-grids.html">Headphones</a></li>
-                        <li><a href="product-grids.html">View All</a></li>
-                    </ul>
-                    <div class="images">
-                        <img src="https://via.placeholder.com/180x180" alt="#" />
-                    </div>
-                </div>
-                <!-- End Single Category -->
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <!-- Start Single Category -->
-                <div class="single-category">
-                    <h3 class="heading">Smart Phones</h3>
-                    <ul>
-                        <li>
-                            <a href="product-grids.html">Smart Television</a>
-                        </li>
-                        <li><a href="product-grids.html">QLED TV</a></li>
-                        <li><a href="product-grids.html">Audios</a></li>
-                        <li><a href="product-grids.html">Headphones</a></li>
-                        <li><a href="product-grids.html">View All</a></li>
-                    </ul>
-                    <div class="images">
-                        <img src="https://via.placeholder.com/180x180" alt="#" />
-                    </div>
-                </div>
-                <!-- End Single Category -->
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <!-- Start Single Category -->
-                <div class="single-category">
-                    <h3 class="heading">Game Console</h3>
-                    <ul>
-                        <li>
-                            <a href="product-grids.html">Smart Television</a>
-                        </li>
-                        <li><a href="product-grids.html">QLED TV</a></li>
-                        <li><a href="product-grids.html">Audios</a></li>
-                        <li><a href="product-grids.html">Headphones</a></li>
-                        <li><a href="product-grids.html">View All</a></li>
-                    </ul>
-                    <div class="images">
-                        <img src="https://via.placeholder.com/180x180" alt="#" />
-                    </div>
-                </div>
-                <!-- End Single Category -->
-            </div> --}}
         </div>
     </div>
 </section>
@@ -250,71 +132,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Product -->
-                @foreach ($trendingProduct as $tp)
-                {{ dd($tp) }}
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/335x335" alt="#" />
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">{{ $tp->category }}</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">Xiaomi Mi Band 5</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$199.00</span>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-                <!-- End Single Product -->
-            </div>
-            {{-- <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Product -->
-                <div class="single-product">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/335x335" alt="#" />
-                        <span class="sale-tag">-25%</span>
-                        <div class="button">
-                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                Cart</a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Speaker</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">Big Power Sound Speaker</a>
-                        </h4>
-                        <ul class="review">
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><span>5.0 Review(s)</span></li>
-                        </ul>
-                        <div class="price">
-                            <span>$275.00</span>
-                            <span class="discount-price">$300.00</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-            </div>
+            @foreach ($trendingProduct as $tp)
             <div class="col-lg-3 col-md-6 col-12">
                 <!-- Start Single Product -->
                 <div class="single-product">
@@ -326,178 +144,18 @@
                         </div>
                     </div>
                     <div class="product-info">
-                        <span class="category">Camera</span>
+                        <span class="category">{{ $tp->category->name }}</span>
                         <h4 class="title">
-                            <a href="product-grids.html">WiFi Security Camera</a>
+                            <a href="product-grids.html">{{ $tp->name }}</a>
                         </h4>
-                        <ul class="review">
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><span>5.0 Review(s)</span></li>
-                        </ul>
                         <div class="price">
-                            <span>$399.00</span>
+                            <span>{{ "Rp".$tp->getTotalBidAmount() }}</span>
                         </div>
                     </div>
                 </div>
                 <!-- End Single Product -->
             </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Product -->
-                <div class="single-product">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/335x335" alt="#" />
-                        <span class="new-tag">New</span>
-                        <div class="button">
-                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                Cart</a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Phones</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">iphone 6x plus</a>
-                        </h4>
-                        <ul class="review">
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><span>5.0 Review(s)</span></li>
-                        </ul>
-                        <div class="price">
-                            <span>$400.00</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Product -->
-                <div class="single-product">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/335x335" alt="#" />
-                        <div class="button">
-                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                Cart</a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Headphones</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">Wireless Headphones</a>
-                        </h4>
-                        <ul class="review">
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><span>5.0 Review(s)</span></li>
-                        </ul>
-                        <div class="price">
-                            <span>$350.00</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Product -->
-                <div class="single-product">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/335x335" alt="#" />
-                        <div class="button">
-                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                Cart</a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Speaker</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">Mini Bluetooth Speaker</a>
-                        </h4>
-                        <ul class="review">
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star"></i></li>
-                            <li><span>4.0 Review(s)</span></li>
-                        </ul>
-                        <div class="price">
-                            <span>$70.00</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Product -->
-                <div class="single-product">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/335x335" alt="#" />
-                        <span class="sale-tag">-50%</span>
-                        <div class="button">
-                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                Cart</a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Headphones</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">PX7 Wireless Headphones</a>
-                        </h4>
-                        <ul class="review">
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star"></i></li>
-                            <li><span>4.0 Review(s)</span></li>
-                        </ul>
-                        <div class="price">
-                            <span>$100.00</span>
-                            <span class="discount-price">$200.00</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Product -->
-                <div class="single-product">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/335x335" alt="#" />
-                        <div class="button">
-                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                Cart</a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Laptop</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">Apple MacBook Air</a>
-                        </h4>
-                        <ul class="review">
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><span>5.0 Review(s)</span></li>
-                        </ul>
-                        <div class="price">
-                            <span>$899.00</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-            </div> --}}
+            @endforeach
         </div>
     </div>
 </section>
@@ -521,6 +179,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-12 col-12">
                 <div class="row">
+                    @foreach ($specialOffer as $offers)
                     <div class="col-lg-4 col-md-4 col-12">
                         <!-- Start Single Product -->
                         <div class="single-product">
@@ -532,85 +191,18 @@
                                 </div>
                             </div>
                             <div class="product-info">
-                                <span class="category">Camera</span>
+                                <span class="category">{{ $offers->category->name }}</span>
                                 <h4 class="title">
-                                    <a href="product-grids.html">WiFi Security Camera</a>
+                                    <a href="product-grids.html">{{ $offers->name }}</a>
                                 </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><span>5.0 Review(s)</span></li>
-                                </ul>
                                 <div class="price">
-                                    <span>$399.00</span>
+                                    <span>{{ "Rp".$offers->getTotalBidAmount() }}</span>
                                 </div>
                             </div>
                         </div>
                         <!-- End Single Product -->
                     </div>
-                    <div class="col-lg-4 col-md-4 col-12">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="https://via.placeholder.com/335x335" alt="#" />
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                        Cart</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">Laptop</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">Apple MacBook Air</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><span>5.0 Review(s)</span></li>
-                                </ul>
-                                <div class="price">
-                                    <span>$899.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Product -->
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-12">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="https://via.placeholder.com/335x335" alt="#" />
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                        Cart</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">Speaker</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">Bluetooth Speaker</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star"></i></li>
-                                    <li><span>4.0 Review(s)</span></li>
-                                </ul>
-                                <div class="price">
-                                    <span>$70.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Product -->
-                    </div>
+                    @endforeach
                 </div>
                 <!-- Start Banner -->
                 <div class="single-banner right" style="
@@ -618,16 +210,15 @@
                         margin-top: 30px;
                     ">
                     <div class="content">
-                        <h2>Samsung Notebook 9</h2>
+                        <h2>{{ $banner->name }}</h2>
                         <p>
-                            Lorem ipsum dolor sit amet, <br />eiusmod tempor
-                            incididunt ut labore.
+                            {{ $banner->description }}
                         </p>
                         <div class="price">
-                            <span>$590.00</span>
+                            <span>{{ "Rp".$banner->getTotalBidAmount() }}</span>
                         </div>
                         <div class="button">
-                            <a href="product-grids.html" class="btn">Shop Now</a>
+                            <a href="product-grids.html" class="btn">Bid Now</a>
                         </div>
                     </div>
                 </div>
@@ -641,24 +232,14 @@
                     </div>
                     <div class="text">
                         <h2>
-                            <a href="product-grids.html">Bluetooth Headphone</a>
+                            <a href="product-grids.html">{{ $offer->name }}</a>
                         </h2>
-                        <ul class="review">
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><i class="lni lni-star-filled"></i></li>
-                            <li><span>5.0 Review(s)</span></li>
-                        </ul>
                         <div class="price">
-                            <span>$200.00</span>
-                            <span class="discount-price">$400.00</span>
+                            <span>{{ "Rp".$offer->starting_price }}</span>
+                            <span class="discount-price">{{ "Rp".$offer->undiscountedPrice() }}</span>
                         </div>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry incididunt ut eiusmod tempor
-                            labores.
+                            {{ $offer->description }}
                         </p>
                     </div>
                     <div class="box-head">
@@ -697,6 +278,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-12 custom-responsive-margin">
                 <h4 class="list-title">Best Sellers</h4>
+                @foreach ($bestSellers as $bs)
                 <!-- Start Single List -->
                 <div class="single-list">
                     <div class="list-image">
@@ -704,122 +286,49 @@
                     </div>
                     <div class="list-info">
                         <h3>
-                            <a href="product-grids.html">GoPro Hero4 Silver</a>
+                            <a href="product-grids.html">{{ $bs->name }}</a>
                         </h3>
-                        <span>$287.99</span>
+                        <span>{{ "Rp".$bs->getTotalBidAmount() }}</span>
                     </div>
                 </div>
                 <!-- End Single List -->
-                <!-- Start Single List -->
-                <div class="single-list">
-                    <div class="list-image">
-                        <a href="product-grids.html"><img src="https://via.placeholder.com/100x100" alt="#" /></a>
-                    </div>
-                    <div class="list-info">
-                        <h3>
-                            <a href="product-grids.html">Puro Sound Labs BT2200</a>
-                        </h3>
-                        <span>$95.00</span>
-                    </div>
-                </div>
-                <!-- End Single List -->
-                <!-- Start Single List -->
-                <div class="single-list">
-                    <div class="list-image">
-                        <a href="product-grids.html"><img src="https://via.placeholder.com/100x100" alt="#" /></a>
-                    </div>
-                    <div class="list-info">
-                        <h3>
-                            <a href="product-grids.html">HP OfficeJet Pro 8710</a>
-                        </h3>
-                        <span>$120.00</span>
-                    </div>
-                </div>
-                <!-- End Single List -->
+                @endforeach
             </div>
             <div class="col-lg-4 col-md-4 col-12 custom-responsive-margin">
                 <h4 class="list-title">New Arrivals</h4>
                 <!-- Start Single List -->
+                @foreach ($newArrivals as $newarr)
                 <div class="single-list">
                     <div class="list-image">
                         <a href="product-grids.html"><img src="https://via.placeholder.com/100x100" alt="#" /></a>
                     </div>
                     <div class="list-info">
                         <h3>
-                            <a href="product-grids.html">iPhone X 256 GB Space Gray</a>
+                            <a href="product-grids.html">{{ $newarr->name }}</a>
                         </h3>
-                        <span>$1150.00</span>
+                        <span>{{ "Rp".$newarr->getTotalBidAmount() }}</span>
                     </div>
                 </div>
-                <!-- End Single List -->
-                <!-- Start Single List -->
-                <div class="single-list">
-                    <div class="list-image">
-                        <a href="product-grids.html"><img src="https://via.placeholder.com/100x100" alt="#" /></a>
-                    </div>
-                    <div class="list-info">
-                        <h3>
-                            <a href="product-grids.html">Canon EOS M50 Mirrorless Camera</a>
-                        </h3>
-                        <span>$950.00</span>
-                    </div>
-                </div>
-                <!-- End Single List -->
-                <!-- Start Single List -->
-                <div class="single-list">
-                    <div class="list-image">
-                        <a href="product-grids.html"><img src="https://via.placeholder.com/100x100" alt="#" /></a>
-                    </div>
-                    <div class="list-info">
-                        <h3>
-                            <a href="product-grids.html">Microsoft Xbox One S</a>
-                        </h3>
-                        <span>$298.00</span>
-                    </div>
-                </div>
+                @endforeach
                 <!-- End Single List -->
             </div>
             <div class="col-lg-4 col-md-4 col-12">
                 <h4 class="list-title">Top Rated</h4>
                 <!-- Start Single List -->
+                @foreach ($topRated as $tr)
                 <div class="single-list">
                     <div class="list-image">
                         <a href="product-grids.html"><img src="https://via.placeholder.com/100x100" alt="#" /></a>
                     </div>
                     <div class="list-info">
                         <h3>
-                            <a href="product-grids.html">Samsung Gear 360 VR Camera</a>
+                            <a href="product-grids.html">{{ $tr->name }}</a>
                         </h3>
-                        <span>$68.00</span>
+                        <span>{{ "Rp".$tr->getTotalBidAmount() }}</span>
                     </div>
                 </div>
                 <!-- End Single List -->
-                <!-- Start Single List -->
-                <div class="single-list">
-                    <div class="list-image">
-                        <a href="product-grids.html"><img src="https://via.placeholder.com/100x100" alt="#" /></a>
-                    </div>
-                    <div class="list-info">
-                        <h3>
-                            <a href="product-grids.html">Samsung Galaxy S9+ 64 GB</a>
-                        </h3>
-                        <span>$840.00</span>
-                    </div>
-                </div>
-                <!-- End Single List -->
-                <!-- Start Single List -->
-                <div class="single-list">
-                    <div class="list-image">
-                        <a href="product-grids.html"><img src="https://via.placeholder.com/100x100" alt="#" /></a>
-                    </div>
-                    <div class="list-info">
-                        <h3>
-                            <a href="product-grids.html">Zeus Bluetooth Headphones</a>
-                        </h3>
-                        <span>$28.00</span>
-                    </div>
-                </div>
-                <!-- End Single List -->
+                @endforeach
             </div>
         </div>
     </div>
