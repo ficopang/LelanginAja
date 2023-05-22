@@ -5,6 +5,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +23,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->middleware('auth');
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', [ProductController::class, 'showProduct'])->name('index');
 Route::get('/about', function () {
     return view('about-us');
 })->name('about-us');
@@ -85,18 +84,16 @@ Route::middleware(['auth'])->group(function () {
         return view('product.checkout');
     })->name('checkout');
 
-    Route::get('/account/chat', [ChatController::class, 'openChatpage'])->name('account.chat');
+    Route::get('/account/chat', [ChatController::class, 'openChatPage'])->name('account.chat');
 
-    Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatpage'])->name('account.chat');
+    Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatPage'])->name('account.chat');
 
     Route::post('/account/chat/{chat_id}', [ChatController::class, 'postChat']);
 
     Route::get('/account/edit', function () {
         return view('account.edit');
     })->name('account.edit');
-    Route::get('/account/transaction', function () {
-        return view('transaction.history');
-    })->name('transaction.history');
+    Route::get('/account/transaction', [TransactionController::class, 'showTransactionHistory'])->name('transaction.history');
     Route::get('/account/withdraw', function () {
         return view('account.withdraw');
     })->name('account.withdraw');

@@ -2,12 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bid;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    //
+    public function showProduct()
+    {
+        $carousel = Product::inRandomOrder()->limit(2)->get();
+
+        $categories = Category::all()->take(6);
+
+        $trendingProduct = Product::withCount('bids')
+            ->orderBy('bids_count', 'desc')
+            ->take(6)
+            ->get();
+
+        $specialOffer = Product::orderBy('start_time', 'asc')->get();
+        $bestSellers = Product::inRandomOrder()->limit(3)->get();
+        $topRated = Product::inRandomOrder()->limit(3)->get();
+
+        $newArrivals = Product::orderBy('created_at', 'asc')->get();
+
+        // dd($newArrivals);
+        return view('index', compact('carousel','categories', 'trendingProduct', 'specialOffer','bestSellers','topRated'));
+    }
 
     public function index()
     {
