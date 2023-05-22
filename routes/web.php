@@ -77,17 +77,22 @@ Route::middleware(['auth'])->group(function () {
     })->name('checkout');
 
     Route::get('/account/chat', [ChatController::class, 'openChatPage'])->name('account.chat');
-
     Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatPage'])->name('account.chat');
-
     Route::post('/account/chat/{chat_id}', [ChatController::class, 'postChat']);
+
     Route::get('/account/', function () {
         return view('account.edit');
     })->name('account.edit');
-    Route::get('/account/edit', function () {
-        return view('account.edit');
+    Route::get('/account/edit', [UserController::class, 'getUserData'])->name('account.edit');
+    Route::post('/account/edit', [UserController::class, 'updateUserData'])->name('account.edit');
+    Route::get('/account/edit/password', function () {
+        return redirect('/account/edit');
     })->name('account.edit');
+    Route::post('/account/edit/password', [UserController::class, 'updatePassword'])->name('account.edit');
+    Route::delete('/account/delete', [UserController::class, 'deleteAccount'])->name('account.delete');
+    
     Route::get('/account/transaction', [TransactionController::class, 'showTransactionHistory'])->name('transaction.history');
+
     Route::get('/account/withdraw', function () {
         return view('account.withdraw');
     })->name('account.withdraw');

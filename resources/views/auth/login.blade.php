@@ -9,31 +9,32 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
                     <form class="card login-form" method="post" action="/login">
+
+                        {{-- menampilkan error validasi --}}
+                        @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
                         @csrf
                         <div class="card-body">
                             <div class="title">
                                 <h3>Login Now</h3>
-                                <p>You can login using your social media account or email address.</p>
-                            </div>
-                            <div class="social-login">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-12"><a class="btn facebook-btn"
-                                            href="javascript:void(0)"><i class="lni lni-facebook-filled"></i> Facebook
-                                            login</a></div>
-                                    <div class="col-lg-4 col-md-4 col-12"><a class="btn twitter-btn"
-                                            href="javascript:void(0)"><i class="lni lni-twitter-original"></i> Twitter
-                                            login</a></div>
-                                    <div class="col-lg-4 col-md-4 col-12"><a class="btn google-btn"
-                                            href="javascript:void(0)"><i class="lni lni-google"></i> Google login</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="alt-option">
-                                <span>Or</span>
                             </div>
                             <div class="form-group input-group">
                                 <label for="reg-fn">Email</label>
-                                <input class="form-control" type="email" id="reg-email" name="email" required>
+                                <input class="form-control" type="email" id="reg-email" name="email" value="{{ old('email') }}" required>
                             </div>
                             <div class="form-group input-group">
                                 <label for="reg-fn">Password</label>
@@ -49,7 +50,7 @@
                             <div class="button">
                                 <button class="btn" type="submit">Login</button>
                             </div>
-                            <p class="outer-link">Don't have an account? <a href="register.html">Register here </a>
+                            <p class="outer-link">Don't have an account? <a href="register">Register here </a>
                             </p>
                         </div>
                     </form>

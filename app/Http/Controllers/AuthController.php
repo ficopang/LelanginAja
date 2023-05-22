@@ -44,8 +44,8 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => 'required|numeric|min:10',
             'address' => 'required',
-            'password' => 'required|min:6|required_with:conf_password|same:conf_password',
-            'conf_password' => 'required|alpha_num|min:8'
+            'password' => 'required|alpha_num|min:8|required_with:confirm_password|same:confirm_password',
+            'confirm_password' => 'required'
         ]);
 
         $user = new User();
@@ -53,7 +53,7 @@ class AuthController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->phone_number = $request->phone;
-        $user->address = $request->phone;
+        $user->address = $request->address;
         $user->password = Hash::make($request->password);
         $user->save();
 
@@ -86,4 +86,5 @@ class AuthController extends Controller
 
         return Redirect('login');
     }
+
 }

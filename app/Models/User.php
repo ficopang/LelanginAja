@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function transactions(): HasMany
     {
-        return $this->hasMany(Transaction::class, 'buyer_id');
+        return $this->hasMany(Transaction::class, 'buyer_id', 'seller_id');
     }
 
     public function products(): HasMany
