@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
     public function showTransactionHistory(){
-        $userTransactions = DB::table('transactions')->where('');
+        $id = Auth::user()->id;
+        $userTransactions = Transaction::where('buyer_id', $id)->get();
+        return view('transaction.history', compact('userTransactions'));
     }
 }

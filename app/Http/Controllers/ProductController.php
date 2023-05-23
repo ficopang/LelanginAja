@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bid;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -12,7 +13,28 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    //
+    public function showProduct()
+    {
+        $carousel = Product::inRandomOrder()->limit(4)->get();
+        $smallBanner = Product::inRandomOrder()->limit(1)->get()->first();
+
+        $categories = Category::all()->take(6);
+
+        $trendingProduct = Product::withCount('bids')
+            ->orderBy('bids_count', 'desc')
+            ->take(8)
+            ->get();
+
+        $specialOffer = Product::orderBy('start_time', 'asc')->limit(3)->get();
+        $banner = Product::inRandomOrder()->limit(1)->get()->first();
+        $offer = Product::inRandomOrder()->limit(1)->get()->first();
+
+        $bestSellers = Product::inRandomOrder()->limit(3)->get();
+        $newArrivals = Product::orderBy('created_at', 'asc')->limit(3)->get();
+        $topRated = Product::inRandomOrder()->limit(3)->get();
+
+        return view('index', compact('carousel','smallBanner','categories', 'trendingProduct', 'specialOffer','banner','offer','bestSellers','newArrivals','topRated'));
+    }
 
     public function index()
     {
@@ -62,8 +84,6 @@ class ProductController extends Controller
         $products->save();
 
         return redirect()->route('products.index')->with('success', 'Product added successfully');
-
-        //return redirect()->back()->with('success', 'Product added successfully!');
     }
 
 

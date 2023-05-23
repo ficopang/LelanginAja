@@ -23,8 +23,8 @@ class TransactionSeeder extends Seeder
             $buyerId = $faker->randomElement($users);
             $sellerId = $faker->randomElement($users);
             $productId = $faker->randomElement($products);
-            $finalPrice = $faker->numberBetween(100, 1000);
-            $status = $faker->randomElement(['completed', 'pending', 'cancelled']);
+            $finalPrice = $faker->numberBetween(10000, 1000000);
+            $status = $faker->randomElement(['Completed', 'Pending', 'Cancelled']);
 
             DB::table('transactions')->insert([
                 'buyer_id' => $buyerId,

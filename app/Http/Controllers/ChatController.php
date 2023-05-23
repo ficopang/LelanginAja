@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
-    public function openChatpage($chat_id = null)
-    {
+    public function openChatPage($chat_id = null){
         $chats = DB::table('chats')->where('sender_id', auth()->id())->orWhere('receiver_id', auth()->id())->get();
 
         $users = $chats->map(function ($chats) {
@@ -30,9 +29,8 @@ class ChatController extends Controller
             return $user;
         });
 
-        $currentUser = User::findOrFail($chat_id);
-        // dd($userLists);
-        return view('account.chat', compact('chats', 'chat_id', 'userLists', 'currentUser'));
+        $currentUser = User::find($chat_id);
+        return view('account.chat', compact('chats', 'chat_id','userLists', 'currentUser'));
     }
 
     public function postChat(Request $request, $chat_id)

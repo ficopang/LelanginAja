@@ -3,9 +3,10 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', [ProductController::class, 'showProduct'])->name('index');
 Route::get('/about', function () {
     return view('about-us');
 })->name('about-us');
@@ -54,7 +53,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'signOut']);
 
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
@@ -68,21 +66,29 @@ Route::middleware(['auth'])->group(function () {
         return view('product.checkout');
     })->name('checkout');
 
-    Route::get('/account/chat', [ChatController::class, 'openChatpage'])->name('account.chat');
-    Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatpage'])->name('account.chat');
+    Route::get('/account/chat', [ChatController::class, 'openChatPage'])->name('account.chat');
+
+    Route::get('/account/chat/{chat_id}', [ChatController::class, 'openChatPage'])->name('account.chat');
+
     Route::post('/account/chat/{chat_id}', [ChatController::class, 'postChat']);
+
     Route::get('/account/', function () {
         return view('account.edit');
     })->name('account.edit');
-    Route::get('/account/edit', function () {
-        return view('account.edit');
+    Route::get('/account/edit', [UserController::class, 'getUserData'])->name('account.edit');
+    Route::post('/account/edit', [UserController::class, 'updateUserData'])->name('account.edit');
+    Route::get('/account/edit/password', function () {
+        return redirect('/account/edit');
     })->name('account.edit');
-    Route::get('/account/transaction', function () {
-        return view('transaction.history');
-    })->name('transaction.history');
+
     Route::get('/acccount/transaction/{id}/send', function () {
         return view('transaction.send');
     })->name('transaction.send');
+    Route::post('/account/edit/password', [UserController::class, 'updatePassword'])->name('account.edit');
+    Route::delete('/account/delete', [UserController::class, 'deleteAccount'])->name('account.delete');
+
+    Route::get('/account/transaction', [TransactionController::class, 'showTransactionHistory'])->name('transaction.history');
+
     Route::get('/account/withdraw', function () {
         return view('account.withdraw');
     })->name('account.withdraw');
@@ -92,5 +98,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/product/{productId}/watchlist', [ProductController::class, 'toggleWatchlist'])->name('watchlist');
     Route::post('/product/{productId}/bid', [BidController::class, 'placeBid']);
+    Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
+
+    Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
+    Route::get('/account/withdraw',[WithdrawController::class, 'index']);
 });
 Route::get('/product/{productId}/info', [BidController::class, 'getProductInfo']);
