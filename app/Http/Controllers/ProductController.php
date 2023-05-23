@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
+use App\Models\Watchlist;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,6 +19,15 @@ class ProductController extends Controller
         $products = Product::paginate(2);
         $categories = Category::all();
         return view('product.manage', compact('products', 'categories'));
+    }
+
+    public function detail($productId)
+    {
+        $product = Product::findOrFail($productId);
+        dd(Carbon::parse($product->end_time), Carbon::now());
+        dd(auth()->user()->wonProducts);
+
+        return view('product.product-details', compact('product', 'product'));
     }
 
     public function store(Request $request)
@@ -106,7 +119,32 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        $categories = Category::all();
-        return view('product.edit', compact('product', 'categories'));
+
+        return view('product.edit', compact('product'));
+    }
+
+    public function toggleWatchlist($productId)
+    {
+        try {
+            $product = Product::findOrFail($productId);
+
+            $watchlist = Watchlist::where('user_id', auth()->id())
+                ->where('product_id', $product->id)
+                ->first();
+
+            if ($watchlist) {
+                $watchlist->delete();
+            } else {
+                $watchlist = new Watchlist();
+                $watchlist->user_id = auth()->id();
+                $watchlist->product_id = $product->id;
+                $watchlist->save();
+            }
+        } catch (ModelNotFoundException $exception) {
+            // Handle the case when the product is not found
+            // You can redirect or show an error message
+        }
+
+        return back();
     }
 }

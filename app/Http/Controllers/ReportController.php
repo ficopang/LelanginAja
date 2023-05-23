@@ -9,23 +9,28 @@ use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    public function submitReport(Request $request)
+    public function index($productId)
+    {
+        $product = Product::findOrFail($productId);
+
+        return view('product.report', compact('product', 'product'));
+    }
+
+    public function submitReport(Request $request, $productId)
     {
         $this->validate($request, [
-            'product_id' => 'required|min:5|max:20',
             'report_text' => 'required|min:5|max:100'
         ]);
 
         $reportText = $request->report_text;
-        $productID = $request->product_id;
 
-        if (DB::table('products')->where('id', $productID)->exists() == False) {
+        if (DB::table('products')->where('id', $productId)->exists() == False) {
             return back()->withErrors("Product ID is not found!");
         }
 
         $report = new ProductReport();
         $report->user_id = 1;
-        $report->product_id = $productID;
+        $report->product_id = $productId;
         $report->text = $reportText;
         $report->save();
         return redirect('/');

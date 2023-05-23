@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,7 +63,21 @@ class User extends Authenticatable
 
     public function transactions(): HasMany
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(
+            Transaction::class,
+            'buyer_id',
+            'seller_id'
+        );
+    }
+
+    public function sellerTransactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'seller_id');
+    }
+
+    public function buyerTransactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'buyer_id');
     }
 
     public function products(): HasMany
@@ -81,17 +98,5 @@ class User extends Authenticatable
     public function watchlist(): HasMany
     {
         return $this->hasMany(Watchlist::class);
-    }
-
-    public function wonProducts(): HasMany
-    {
-        return $this->hasMany(Product::class)
-            ->whereHas('bids', function ($query) {
-                $query->where('user_id', $this->id)
-                    ->latest()
-                    ->take(1);
-            })
-            ->where('end_time', '<', now())
-            ->whereDoesntHave('transaction');
     }
 }

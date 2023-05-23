@@ -129,16 +129,16 @@
                                     <div class="cart-items">
                                         <a href="javascript:void(0)" class="main-btn">
                                             <i class="lni lni-cart"></i>
-                                            <span class="total-items">{{ auth()->user()->wonProducts->count() }}</span>
+                                            <span class="total-items">{{ $wonProducts->count() }}</span>
                                         </a>
                                         <!-- Shopping Item -->
                                         <div class="shopping-item">
                                             <div class="dropdown-cart-header">
-                                                <span>{{ auth()->user()->wonProducts->count() }} Items</span>
+                                                <span>{{ $wonProducts->count() }} Items</span>
                                                 <a href="/cart">View Cart</a>
                                             </div>
                                             <ul class="shopping-list">
-                                                @foreach (auth()->user()->wonProducts as $product)
+                                                @foreach ($wonProducts as $product)
                                                     <li>
                                                         <div class="cart-img-head">
                                                             <a class="cart-img" href="/product/{{ $product->id }}"><img
@@ -149,8 +149,8 @@
                                                         <div class="content">
                                                             <h4><a href="/product/{{ $product->id }}">
                                                                     {{ $product->name }}</a></h4>
-                                                            <p class="quantity"><span class="amount">Rp
-                                                                    {{ $product->getTotalBidAmount() }}</span>
+                                                            <p class="quantity"><span
+                                                                    class="amount">Rp{{ $product->getTotalBidAmount() }}</span>
                                                             </p>
                                                         </div>
                                                     </li>
@@ -159,7 +159,7 @@
                                             <div class="bottom">
                                                 <div class="total">
                                                     <span>Total</span>
-                                                    <span class="total-amount">$134.00</span>
+                                                    <span class="total-amount">Rp{{ $totalBidAmount }}</span>
                                                 </div>
                                                 <div class="button">
                                                     <a href="/checkout" class="btn animate">Checkout</a>
