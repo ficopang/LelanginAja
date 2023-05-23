@@ -52,7 +52,7 @@
                             <p>{{ $tr->created_at }}</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>Sunib</p>
+                            <p>{{ $tr->seller->first_name." ".$tr->seller->last_name }}</p>
                         </div>
                         <div class="col-lg-1 col-md-3 col-12 align-right">
                             <ul class="action-btn">
