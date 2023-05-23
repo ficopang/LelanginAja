@@ -63,9 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart', function () {
         return view('product.cart');
     })->name('cart');
-    Route::get('/checkout', function () {
-        return view('product.checkout');
-    })->name('checkout');
+    Route::get('/checkout', [TransactionController::class, 'checkoutPage'])->name('checkout');
 
     Route::get('/account/chat', [ChatController::class, 'openChatPage'])->name('account.chat');
 
