@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
@@ -39,25 +40,17 @@ Route::get('/register', function () {
 Route::post('/login', [AuthController::class, 'customLogin']);
 Route::post('/register', [AuthController::class, 'customRegistration']);
 
+Route::get('/product', function () {
+    return view('product.product-grids');
+})->name('product.grids');
+Route::get('/product/list', function () {
+    return view('product.product-list');
+})->name('product.list');
+Route::get('/product/manage', [ProductController::class, 'index'])->name('product.manage');
+Route::get('/product/{productId}', [ProductController::class, 'detail'])->name('product.details');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'signOut']);
-
-    Route::get('/product', function () {
-        return view('product.product-grids');
-    })->name('product.grids');
-    Route::get('/product/list', function () {
-        return view('product.product-list');
-    })->name('product.list');
-    Route::get('/product/manage', [ProductController::class, 'index'])->name('product.manage');
-    Route::get('/product/{id}/send', function () {
-        return view('product.send');
-    })->name('product.send');
-    Route::get('/product/{id}', function () {
-        return view('product.product-details');
-    })->name('product.details');
-    Route::get('/product/{id}/send', function () {
-        return view('product.send');
-    })->name('product.send');
 
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
@@ -87,6 +80,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account/edit/password', function () {
         return redirect('/account/edit');
     })->name('account.edit');
+
+    Route::get('/acccount/transaction/{id}/send', function () {
+        return view('transaction.send');
+    })->name('transaction.send');
     Route::post('/account/edit/password', [UserController::class, 'updatePassword'])->name('account.edit');
     Route::delete('/account/delete', [UserController::class, 'deleteAccount'])->name('account.delete');
 
@@ -96,12 +93,14 @@ Route::middleware(['auth'])->group(function () {
         return view('account.withdraw');
     })->name('account.withdraw');
 
-    Route::get('/report', function () {
-        return view('product.report');
-    })->name('report');
+    Route::get('/product/{productId}/report', [ReportController::class, 'index'])->name('report');
+    Route::post('/product/{productId}/report', [ReportController::class, 'submitReport'])->name('report');
 
+    Route::post('/product/{productId}/watchlist', [ProductController::class, 'toggleWatchlist'])->name('watchlist');
+    Route::post('/product/{productId}/bid', [BidController::class, 'placeBid']);
     Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
 
     Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
     Route::get('/account/withdraw',[WithdrawController::class, 'index']);
 });
+Route::get('/product/{productId}/info', [BidController::class, 'getProductInfo']);
