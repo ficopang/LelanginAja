@@ -24,7 +24,7 @@
                                 </p>
                                 <h3><span>Starting from</span>{{ "Rp".$cr->starting_price }}</h3>
                                 <div class="button">
-                                    <a href="/product/{{ $cr->id }}" class="btn">Shop Now</a>
+                                    <a href="/product/{{ $cr->id }}" class="btn">Bid Now!</a>
                                 </div>
                             </div>
                         </div>
@@ -139,8 +139,7 @@
                     <div class="product-image">
                         <img src="https://via.placeholder.com/335x335" alt="#" />
                         <div class="button">
-                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                Cart</a>
+                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>Bid now!</a>
                         </div>
                     </div>
                     <div class="product-info">
@@ -186,8 +185,7 @@
                             <div class="product-image">
                                 <img src="https://via.placeholder.com/335x335" alt="#" />
                                 <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                        Cart</a>
+                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Bid Now!</a>
                                 </div>
                             </div>
                             <div class="product-info">
@@ -218,7 +216,7 @@
                             <span>{{ "Rp".$banner->getTotalBidAmount() }}</span>
                         </div>
                         <div class="button">
-                            <a href="product-grids.html" class="btn">Bid Now</a>
+                            <a href="product-grids.html" class="btn">Bid Now!</a>
                         </div>
                     </div>
                 </div>
