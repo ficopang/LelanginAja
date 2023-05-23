@@ -27,9 +27,11 @@ class PaymentSeeder extends Seeder
 
             DB::table('payments')->insert([
                 'transaction_id' => $transactionId,
-                'payment_method' => $paymentMethod,
-                'amount' => $amount,
-                'status' => $status,
+                'cardholderName' => $faker->name(),
+                'cardNumber' => $faker->numberBetween(100000000, 9999999999),
+                'expMonth' => $faker->month(),
+                'expYear' => $faker->year(),
+                'cvc' => $faker->numberBetween(100, 999),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WithdrawController;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,5 +103,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
     Route::get('/account/withdraw',[WithdrawController::class, 'index']);
+    Route::post('/checkout',[TransactionController::class, 'saveShippingAddres']);
 });
 Route::get('/product/{productId}/info', [BidController::class, 'getProductInfo']);

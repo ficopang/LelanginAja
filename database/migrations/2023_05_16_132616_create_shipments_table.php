@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('transaction_id');
+            $table->string('firstName');
+            $table->string('lastName');
+            $table->string('phoneNumber');
             $table->string('courier');
-            $table->text('shipping_address');
-            $table->string('shipping_city');
-            $table->string('shipping_province');
-            $table->string('shipping_postal_code');
-            $table->unsignedBigInteger('shipping_cost');
+            $table->text('address');
+            $table->string('city');
+            $table->string('province');
+            $table->string('postal_code');
+            $table->unsignedBigInteger('cost');
             $table->string('status');
             $table->timestamps();
 

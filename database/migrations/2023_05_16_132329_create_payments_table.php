@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('transaction_id');
-            $table->string('payment_method');
-            $table->unsignedBigInteger('amount');
-            $table->string('status');
+            $table->string('cardholderName');
+            $table->string('cardNumber');
+            $table->string('expMonth');
+            $table->string('expYear');
+            $table->string('cvc');
             $table->timestamps();
 
             $table->foreign('transaction_id')->references('id')->on('transactions');
