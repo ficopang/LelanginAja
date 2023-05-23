@@ -13,6 +13,7 @@
                             <main id="gallery">
                                 <div class="main-img">
                                     <img src="https://via.placeholder.com/1000x670" id="current" alt="#">
+                                    {{-- <img src="{{ asset('storage/' . $product->image_url) }}" id="current" alt="#"> --}}
                                 </div>
                                 <div class="images">
                                     <img src="https://via.placeholder.com/1000x670" class="img" alt="#">
@@ -26,74 +27,65 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
-                            <h2 class="title">GoPro Karma Camera Drone</h2>
-                            <p class="category"><i class="lni lni-tag"></i> Drones:<a href="javascript:void(0)">Action
-                                    cameras</a></p>
-                            <h3 class="price">$850<span>$945</span></h3>
-                            <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+                            <h2 class="title">{{ $product->name }}</h2>
                             <div class="row">
-                                <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group color-option">
-                                        <label class="title-label" for="size">Choose color</label>
-                                        <div class="single-checkbox checkbox-style-1">
-                                            <input type="checkbox" id="checkbox-1" checked>
-                                            <label for="checkbox-1"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-2">
-                                            <input type="checkbox" id="checkbox-2">
-                                            <label for="checkbox-2"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-3">
-                                            <input type="checkbox" id="checkbox-3">
-                                            <label for="checkbox-3"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-4">
-                                            <input type="checkbox" id="checkbox-4">
-                                            <label for="checkbox-4"><span></span></label>
-                                        </div>
-                                    </div>
+                                <div class="col-md-6 col-12">
+                                    <p class="category"><i class="lni lni-tag"></i> <a
+                                            href="/search/{{ $product->category->id }}">{{ $product->category->name }}</a>
+                                    </p>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group">
-                                        <label for="color">Battery capacity</label>
-                                        <select class="form-control" id="color">
-                                            <option>5100 mAh</option>
-                                            <option>6200 mAh</option>
-                                            <option>8000 mAh</option>
-                                        </select>
-                                    </div>
+                                <div class="col-md-6 col-12 text-danger fw-bold" id="countdown"></div>
+                            </div>
+                            <div>
+                                <span class="d-inline price" id="price">Rp{{ $product->getTotalBidAmount() }}</span>
+                                <span class="d-inline h3" id="last-bidder">
+                                    {{ $product->bids()->latest('created_at')->first()? ' - ' .$product->bids()->latest('created_at')->first()->user->first_name: '' }}
+                                </span>
+                            </div>
+                            <div class="row info-text my-0 pb-0">
+                                <div class="col-sm-6 col-12 fw-bold">Starting Price</div>
+                                <div class="col-sm-6 col-12">{{ $product->starting_price }}</div>
+                            </div>
+                            <div class="row info-text my-0 pb-0">
+                                <div class="col-sm-6 col-12 fw-bold">Minimum Bid Increment</div>
+                                <div class="col-sm-6 col-12">{{ $product->min_bid_increment }}</div>
+                            </div>
+                            <div class="row info-text my-0 pb-0">
+                                <div class="col-sm-6 col-12 fw-bold">Start Time</div>
+                                <div class="col-sm-6 col-12">{{ $product->start_time }}</div>
+                            </div>
+                            <div class="row info-text my-0">
+                                <div class="col-sm-6 col-12 fw-bold">End Time</div>
+                                <div class="col-sm-6 col-12">{{ $product->end_time }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-12">
+                                    <input type="number" class="form-control" id="bid-amount" name="bid-amount" required
+                                        step="{{ $product->min_bid_increment }}" value="{{ $product->min_bid_increment }}">
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group quantity">
-                                        <label for="color">Quantity</label>
-                                        <select class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
+                                <div class="col-sm-6 col-12">
+                                    <div class="button cart-button">
+                                        @csrf
+                                        <button class="btn" style="width: 100%;" id="bid-button"
+                                            onclick="placeBid({{ $product->id }})">Bid</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="bottom-content">
                                 <div class="row align-items-end">
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <div class="button cart-button">
-                                            <button class="btn" style="width: 100%;">Add to Cart</button>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="wish-button">
+                                            <a href="/product/{{ $product->id }}/report" class="btn"
+                                                style="width: 100%;">Report</a>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <div class="wish-button">
-                                            <button class="btn"><i class="lni lni-reload"></i> Compare</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <div class="wish-button">
-                                            <button class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
-                                        </div>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <form action="/product/{{ $product->id }}/watchlist" method="POST">
+                                            @csrf
+                                            <div class="wish-button">
+                                                <button class="btn"><i class="lni lni-eye"></i> To Watchlist</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -104,161 +96,10 @@
             <div class="product-details-info">
                 <div class="single-block">
                     <div class="row">
-                        <div class="col-lg-6 col-12">
+                        <div class="col-12">
                             <div class="info-body custom-responsive-margin">
-                                <h4>Details</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</p>
-                                <h4>Features</h4>
-                                <ul class="features">
-                                    <li>Capture 4K30 Video and 12MP Photos</li>
-                                    <li>Game-Style Controller with Touchscreen</li>
-                                    <li>View Live Camera Feed</li>
-                                    <li>Full Control of HERO6 Black</li>
-                                    <li>Use App for Dedicated Camera Operation</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="info-body">
-                                <h4>Specifications</h4>
-                                <ul class="normal-list">
-                                    <li><span>Weight:</span> 35.5oz (1006g)</li>
-                                    <li><span>Maximum Speed:</span> 35 mph (15 m/s)</li>
-                                    <li><span>Maximum Distance:</span> Up to 9,840ft (3,000m)</li>
-                                    <li><span>Operating Frequency:</span> 2.4GHz</li>
-                                    <li><span>Manufacturer:</span> GoPro, USA</li>
-                                </ul>
-                                <h4>Shipping Options:</h4>
-                                <ul class="normal-list">
-                                    <li><span>Courier:</span> 2 - 4 days, $22.50</li>
-                                    <li><span>Local Shipping:</span> up to one week, $10.00</li>
-                                    <li><span>UPS Ground Shipping:</span> 4 - 6 days, $18.00</li>
-                                    <li><span>Unishop Global Export:</span> 3 - 4 days, $25.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-12">
-                        <div class="single-block give-review">
-                            <h4>4.5 (Overall)</h4>
-                            <ul>
-                                <li>
-                                    <span>5 stars - 38</span>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                </li>
-                                <li>
-                                    <span>4 stars - 10</span>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star"></i>
-                                </li>
-                                <li>
-                                    <span>3 stars - 3</span>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star"></i>
-                                    <i class="lni lni-star"></i>
-                                </li>
-                                <li>
-                                    <span>2 stars - 1</span>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star"></i>
-                                    <i class="lni lni-star"></i>
-                                    <i class="lni lni-star"></i>
-                                </li>
-                                <li>
-                                    <span>1 star - 0</span>
-                                    <i class="lni lni-star-filled"></i>
-                                    <i class="lni lni-star"></i>
-                                    <i class="lni lni-star"></i>
-                                    <i class="lni lni-star"></i>
-                                    <i class="lni lni-star"></i>
-                                </li>
-                            </ul>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn review-btn" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Leave a Review
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-12">
-                        <div class="single-block">
-                            <div class="reviews">
-                                <h4 class="title">Latest Reviews</h4>
-                                <!-- Start Single Review -->
-                                <div class="single-review">
-                                    <img src="https://via.placeholder.com/150x150" alt="#">
-                                    <div class="review-info">
-                                        <h4>Awesome quality for the price
-                                            <span>Jacob Hammond
-                                            </span>
-                                        </h4>
-                                        <ul class="stars">
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                        </ul>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor...</p>
-                                    </div>
-                                </div>
-                                <!-- End Single Review -->
-                                <!-- Start Single Review -->
-                                <div class="single-review">
-                                    <img src="https://via.placeholder.com/150x150" alt="#">
-                                    <div class="review-info">
-                                        <h4>My husband love his new...
-                                            <span>Alex Jaza
-                                            </span>
-                                        </h4>
-                                        <ul class="stars">
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star"></i></li>
-                                        </ul>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor...</p>
-                                    </div>
-                                </div>
-                                <!-- End Single Review -->
-                                <!-- Start Single Review -->
-                                <div class="single-review">
-                                    <img src="https://via.placeholder.com/150x150" alt="#">
-                                    <div class="review-info">
-                                        <h4>I love the built quality...
-                                            <span>Jacob Hammond
-                                            </span>
-                                        </h4>
-                                        <ul class="stars">
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                        </ul>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor...</p>
-                                    </div>
-                                </div>
-                                <!-- End Single Review -->
+                                <h4>Description</h4>
+                                <p>{{ $product->description }}</p>
                             </div>
                         </div>
                     </div>
@@ -267,61 +108,125 @@
         </div>
     </section>
     <!-- End Item Details -->
+@endsection
 
-    <!-- Review Modal -->
-    <div class="modal fade review-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Leave a Review</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="review-name">Your Name</label>
-                                <input class="form-control" type="text" id="review-name" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="review-email">Your Email</label>
-                                <input class="form-control" type="email" id="review-email" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="review-subject">Subject</label>
-                                <input class="form-control" type="text" id="review-subject" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="review-rating">Rating</label>
-                                <select class="form-control" id="review-rating">
-                                    <option>5 Stars</option>
-                                    <option>4 Stars</option>
-                                    <option>3 Stars</option>
-                                    <option>2 Stars</option>
-                                    <option>1 Star</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="review-message">Review</label>
-                        <textarea class="form-control" id="review-message" rows="8" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer button">
-                    <button type="button" class="btn">Submit Review</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Review Modal -->
+@section('custom-js')
+    <script type="text/javascript">
+        const current = document.getElementById("current");
+        const opacity = 0.6;
+        const imgs = document.querySelectorAll(".img");
+        imgs.forEach(img => {
+            img.addEventListener("click", (e) => {
+                imgs.forEach(img => {
+                    img.style.opacity = 1;
+                });
+                current.src = e.target.src;
+                e.target.style.opacity = opacity;
+            });
+        });
+    </script>
+    <script>
+        // Get the countdown element
+        const countdownElement = document.getElementById('countdown');
+
+        // Function to update the countdown
+        function updateCountdown(endTime) {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+
+            // Calculate remaining days, hours, minutes, and seconds
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // If the countdown reaches 0, refresh the page
+            if (distance <= 0) {
+                days = hours = minutes = seconds = 0;
+            }
+
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            // Update the countdown element
+        }
+
+        // Function to make XHR request and update the countdown and last bidder's first name
+        function updateProductInfo() {
+            const xhr = new XMLHttpRequest();
+            const productId = '{{ $product->id }}';
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+
+                        // Update the countdown
+                        const endTime = new Date(response.end_time).getTime();
+                        updateCountdown(endTime);
+
+                        // Update the last bidder's first name
+                        const currentPrice = response.current_price;
+                        const currentPriceElement = document.getElementById('price');
+                        currentPriceElement.textContent = 'Rp' + currentPrice;
+                        // Update the last bidder's first name
+                        const lastBidderFirstName = response.last_bidder_first_name;
+                        const lastBidderElement = document.getElementById('last-bidder');
+                        if (response.last_bidder_first_name) {
+                            lastBidderElement.textContent = ' - ' + lastBidderFirstName;
+                        }
+                    }
+                }
+            };
+
+            xhr.open('GET', `/product/${productId}/info`, true);
+            xhr.send();
+        }
+
+        // Update the product information and countdown initially
+        updateProductInfo();
+
+        // Update the product information and countdown every second
+        setInterval(updateProductInfo, 1000);
+    </script>
+    <script>
+        function placeBid(productId) {
+            @guest
+            alert('Please login to place bid')
+        @endguest
+
+        var bidAmount = document.getElementById('bid-amount').value;
+
+        // Create a new XHR object
+        var xhr = new XMLHttpRequest();
+
+        // Set the request URL
+        var url = '/product/' + productId + '/bid';
+
+        // Set the request method to POST
+        xhr.open('POST', url, true);
+
+        // Set the request headers
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+        // Set the callback function to handle the response
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                // alert(response.message);
+            } else {
+                var error = JSON.parse(xhr.responseText);
+                alert(error.error);
+            }
+        };
+
+        // Create the request data object
+        var requestData = {
+            bid_amount: bidAmount
+        };
+
+        // Send the request with the data
+        xhr.send(JSON.stringify(requestData));
+        }
+    </script>
+
 @endsection

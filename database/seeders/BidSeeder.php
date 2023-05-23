@@ -24,12 +24,12 @@ class BidSeeder extends Seeder
 
             for ($i = 0; $i < $bidCount; $i++) {
                 $userId = $faker->randomElement($users);
-                $price = $faker->numberBetween(100, 1000);
+                $bid_amount = $faker->numberBetween(1000, 100000);
 
                 DB::table('bids')->insert([
                     'user_id' => $userId,
                     'product_id' => $productId,
-                    'price' => $price,
+                    'bid_amount' => $bid_amount,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
