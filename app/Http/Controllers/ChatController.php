@@ -30,7 +30,6 @@ class ChatController extends Controller
         });
 
         $currentUser = User::find($chat_id);
-        // dd($userLists);
         return view('account.chat', compact('chats', 'chat_id','userLists', 'currentUser'));
     }
 
