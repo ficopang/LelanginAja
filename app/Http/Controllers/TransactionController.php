@@ -19,6 +19,22 @@ class TransactionController extends Controller
         return view('transaction.history', compact('userTransactions'));
     }
 
+    public function checkoutPage() {
+        $userId = auth()->id();
+        $wonProducts = Product::whereHas('bids', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })
+            ->whereDoesntHave('transaction')
+            ->where('end_time', '<', Carbon::now()->addHours(7))
+            ->get();
+
+        $totalBidAmount = $wonProducts->sum(function ($product) {
+            return $product->getTotalBidAmount();
+        });
+
+        return view('product.checkout', compact('wonProducts', 'totalBidAmount'));
+    }
+
     public function saveShippingAddres(Request $request){
         $user = User::find(auth()->id());
         $userId = auth()->id();

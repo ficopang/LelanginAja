@@ -90,7 +90,7 @@
                                                                 <label for="shipping-1">
                                                                     <img src="https://via.placeholder.com/60x32" alt="Sipping">
                                                                     <p>AnterAja</p>
-                                                                    <span class="price">$10.50</span>
+                                                                    <span class="price">Rp40000</span>
                                                                 </label>
                                                             </div>
                                                             <div class="single-payment-option">
@@ -98,7 +98,7 @@
                                                                 <label for="shipping-2">
                                                                     <img src="https://via.placeholder.com/60x32" alt="Sipping">
                                                                     <p>JNT</p>
-                                                                    <span class="price">$10.50</span>
+                                                                    <span class="price">Rp40000</span>
                                                                 </label>
                                                             </div>
                                                             <div class="single-payment-option">
@@ -106,7 +106,7 @@
                                                                 <label for="shipping-3">
                                                                     <img src="https://via.placeholder.com/60x32" alt="Sipping">
                                                                     <p>SiCepat</p>
-                                                                    <span class="price">$10.50</span>
+                                                                    <span class="price">Rp40000</span>
                                                                 </label>
                                                             </div>
                                                             <div class="single-payment-option">
@@ -114,7 +114,7 @@
                                                                 <label for="shipping-4">
                                                                     <img src="https://via.placeholder.com/60x32" alt="Sipping">
                                                                     <p>JNE</p>
-                                                                    <span class="price">$10.50</span>
+                                                                    <span class="price">Rp40000</span>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -200,30 +200,24 @@
                                 <h5 class="title">Pricing Table</h5>
 
                                 <div class="sub-total-price">
-                                    <div class="total-price">
-                                        <p class="value">Product Price:</p>
-                                        <p class="price">$144.00</p>
-                                    </div>
+                                    @foreach ($wonProducts as $wonProduct)
+                                        <div class="total-price">
+                                            <p class="value">{{$wonProduct->name}}</p>
+                                            <p class="price">Rp{{$wonProduct->getTotalBidAmount()}}</p>
+                                        </div>
+                                    @endforeach
                                     <div class="total-price shipping">
                                         <p class="value">Shipping Price:</p>
-                                        <p class="price">$10.50</p>
+                                        <p class="price">Rp40000</p>
                                     </div>
                                 </div>
 
                                 <div class="total-payable">
                                     <div class="payable-price">
                                         <p class="value">Subotal Price:</p>
-                                        <p class="price">$164.50</p>
+                                        <p class="price">Rp{{$totalBidAmount + 40000}}</p>
                                     </div>
                                 </div>
-                                <div class="price-table-btn button">
-                                    <a href="javascript:void(0)" class="btn btn-alt">Checkout</a>
-                                </div>
-                            </div>
-                            <div class="checkout-sidebar-banner mt-30">
-                                <a href="product-grids.html">
-                                    <img src="https://via.placeholder.com/400x330" alt="#">
-                                </a>
                             </div>
                         </div>
                     </div>
