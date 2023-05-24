@@ -50,7 +50,8 @@
                                                                     <i class="lni lni-user"></i>
                                                                 </div>
                                                                 <div class="flex-grow-1 ms-3">
-                                                                    <h3>{{ $user->first_name . ' ' . $user->last_name }}</h3>
+                                                                    <h3>{{ $user->first_name . ' ' . $user->last_name }}
+                                                                    </h3>
                                                                     <p>{{ $user->text }}</p>
                                                                 </div>
                                                             </a>
@@ -112,7 +113,7 @@
                                             <input type="text" class="form-control" aria-label="message…"
                                                 placeholder="Write message…" name="chat-message">
 
-                                            <button type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                            <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>
                                                 Send</button>
                                         </form>
                                     </div>

@@ -41,18 +41,19 @@ Route::get('/register', function () {
 Route::post('/login', [AuthController::class, 'customLogin']);
 Route::post('/register', [AuthController::class, 'customRegistration']);
 
-Route::get('/product', function () {
-    return view('product.product-grids');
-})->name('product.grids');
-Route::get('/product/list', function () {
-    return view('product.product-list');
-})->name('product.list');
-Route::get('/product/manage', [ProductController::class, 'index'])->name('product.manage');
+Route::get(
+    '/product',
+    [ProductController::class, 'list']
+)->name('product.list');
+// Route::get('/product/list', function () {
+//     return view('product.product-list');
+// })->name('product.list');
 Route::get('/product/{productId}', [ProductController::class, 'detail'])->name('product.details');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'signOut']);
 
+    Route::get('/product/manage', [ProductController::class, 'index'])->name('product.manage');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
@@ -100,7 +101,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/report', [ReportController::class, 'submitReport'])->name('report');
 
     Route::post('/account/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('account');
-    Route::get('/account/withdraw',[WithdrawController::class, 'index']);
-    Route::post('/checkout',[TransactionController::class, 'saveShippingAddres']);
+    Route::get('/account/withdraw', [WithdrawController::class, 'index']);
+    Route::post('/checkout', [TransactionController::class, 'saveShippingAddres']);
 });
 Route::get('/product/{productId}/info', [BidController::class, 'getProductInfo']);

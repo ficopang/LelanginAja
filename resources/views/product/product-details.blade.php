@@ -12,16 +12,16 @@
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
-                                    <img src="https://via.placeholder.com/1000x670" id="current" alt="#">
+                                    <img src="{{ asset('storage/' . $product->image_url) }}" id="current" alt="#">
                                     {{-- <img src="{{ asset('storage/' . $product->image_url) }}" id="current" alt="#"> --}}
                                 </div>
-                                <div class="images">
+                                {{-- <div class="images">
                                     <img src="https://via.placeholder.com/1000x670" class="img" alt="#">
                                     <img src="https://via.placeholder.com/1000x670" class="img" alt="#">
                                     <img src="https://via.placeholder.com/1000x670" class="img" alt="#">
                                     <img src="https://via.placeholder.com/1000x670" class="img" alt="#">
                                     <img src="https://via.placeholder.com/1000x670" class="img" alt="#">
-                                </div>
+                                </div> --}}
                             </main>
                         </div>
                     </div>
@@ -31,7 +31,8 @@
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <p class="category"><i class="lni lni-tag"></i> <a
-                                            href="/search/{{ $product->category->id }}">{{ $product->category->name }}</a>
+                                            href="/product?category_id={{ $product->category->id }}"
+                                            style="text-transform: capitalize;">{{ str_replace('_', ' ', $product->category->name) }}</a>
                                     </p>
                                 </div>
                                 <div class="col-md-6 col-12 text-danger fw-bold" id="countdown"></div>
@@ -61,7 +62,8 @@
                             <div class="row">
                                 <div class="col-sm-6 col-12">
                                     <input type="number" class="form-control" id="bid-amount" name="bid-amount" required
-                                        step="{{ $product->min_bid_increment }}" value="{{ $product->min_bid_increment }}">
+                                        step="{{ $product->min_bid_increment }}"
+                                        value="{{ $product->min_bid_increment }}">
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <div class="button cart-button">
@@ -73,10 +75,16 @@
                             </div>
                             <div class="bottom-content">
                                 <div class="row align-items-end">
-                                    <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="col-lg-3 col-md-3 col-12">
                                         <div class="wish-button">
                                             <a href="/product/{{ $product->id }}/report" class="btn"
                                                 style="width: 100%;">Report</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-12">
+                                        <div class="wish-button">
+                                            <a href="/account/chat/{{ $product->user_id }}" class="btn"
+                                                style="width: 100%;">Chat</i></a>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">

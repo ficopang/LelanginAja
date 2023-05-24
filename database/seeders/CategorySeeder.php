@@ -12,19 +12,30 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
+        // $categories = [
+        //     ['name' => 'Electronics'],
+        //     ['name' => 'Fashion'],
+        //     ['name' => 'Home & Garden'],
+        //     ['name' => 'Sports'],
+        //     ['name' => 'Accessories'],
+        //     ['name' => 'Televisions'],
+        //     ['name' => 'Sunglass'],
+        //     ['name' => 'Watch'],
+        //     ['name' => 'Home Audio & Theater'],
+        //     ['name' => 'Computers & Tablets'],
+        //     ['name' => 'Books'],
+        //     // Add more categories as needed
+        // ];
+
         $categories = [
-            ['name' => 'Electronics'],
-            ['name' => 'Fashion'],
-            ['name' => 'Home & Garden'],
-            ['name' => 'Sports'],
-            ['name' => 'Accessories'],
-            ['name' => 'Televisions'],
-            ['name' => 'Sunglass'],
-            ['name' => 'Watch'],
-            ['name' => 'Home Audio & Theater'],
-            ['name' => 'Computers & Tablets'],
-            ['name' => 'Books'],
-            // Add more categories as needed
+            ['name' => 'televisions'],
+            ['name' => 'mobile_phones'],
+            ['name' => 'laptops'],
+            ['name' => 'cameras'],
+            ['name' => 'mens_clothing'],
+            ['name' => 'womens_clothing'],
+            ['name' => 'jewelry'],
+            ['name' => 'watches'],
         ];
 
         DB::table('categories')->insert($categories);
