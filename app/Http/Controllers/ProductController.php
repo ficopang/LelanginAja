@@ -33,7 +33,7 @@ class ProductController extends Controller
         $newArrivals = Product::orderBy('created_at', 'asc')->limit(3)->get();
         $topRated = Product::inRandomOrder()->limit(3)->get();
 
-        return view('index', compact('carousel','smallBanner','categories', 'trendingProduct', 'specialOffer','banner','offer','bestSellers','newArrivals','topRated'));
+        return view('index', compact('carousel', 'smallBanner', 'categories', 'trendingProduct', 'specialOffer', 'banner', 'offer', 'bestSellers', 'newArrivals', 'topRated'));
     }
 
     public function index()
@@ -43,12 +43,44 @@ class ProductController extends Controller
         return view('product.manage', compact('products', 'categories'));
     }
 
+    public function filterCategory($categoryId)
+    {
+        $products = Category::findOrFail()->products();
+
+        return view('products.search', ['products' => $products]);
+    }
+
+    public function list(Request $request)
+    {
+        $query = $request->input('query');
+        $categoryId = $request->input('category_id');
+
+        $products = Product::query();
+        $categories = Category::all();
+
+        if ($query) {
+            $products->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('name', 'like', "%$query%")
+                    ->orWhere('description', 'like', "%$query%");
+            });
+        }
+
+        if ($categoryId != 'none') {
+            $products->where('category_id', $categoryId);
+        }
+
+        if (!$query && !$categoryId) {
+            $products->whereNotNull('id'); // Include all products
+        }
+
+        $products = $products->paginate(6);
+
+        return view('product.product-grids', compact('products', 'query', 'categoryId', 'categories'));
+    }
+
     public function detail($productId)
     {
         $product = Product::findOrFail($productId);
-        dd(Carbon::parse($product->end_time), Carbon::now());
-        dd(auth()->user()->wonProducts);
-
         return view('product.product-details', compact('product', 'product'));
     }
 

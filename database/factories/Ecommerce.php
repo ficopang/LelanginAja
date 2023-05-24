@@ -24,19 +24,19 @@ class Ecommerce extends Base
     ];
 
     protected static $mensClothing = [
-        "Levi's Men's 505 Regular Fit Jeans", "Men's Standard Full-Zip Hooded Fleece Sweatshirt", "Men's Waffle Shawl Robe", "Levi's Men's 550 Relaxed Fit Jeans", "Men's Heavyweight Hooded Puffer Coat", "Men's Fleece Crewneck Sweatshirt", "Men's Regular-fit Cotton Pique Polo Shirt", "Men's Straight-Fit Woven Pajama Pant", "Men's Regular-Fit Long-Sleeve Flannel Shirt", "Men's Quick-Dry Swim Trunk", "Men's Jogger"
+        "Levi's Men's 505 Regular Fit Jeans", "Men's Standard Hooded Fleece Sweatshirt", "Men's Waffle Shawl Robe", "Levi's Men's 550 Relaxed Fit Jeans", "Men's Heavyweight Hooded Puffer Coat", "Men's Fleece Crewneck Sweatshirt", "Men's Regular-fit Cotton Polo Shirt", "Men's Straight-Fit Woven Pajama Pant", "Men's Regular-Fit Long-Sleeve Flannel Shirt", "Men's Quick-Dry Swim Trunk", "Men's Jogger"
     ];
 
     protected static $womensClothing = [
-        "Women's Lightweight Long-Sleeve Full-Zip Water-Resistant Packable Hooded Puffer Jacket", "Pinzon Terry Bathrobe 100% Cotton", "Women's Studio Terry Relaxed-Fit Jogger Pant", "Women's Classic Fit Lightweight Long-Sleeve V-Neck Sweater", "Women's Blake Long Blazer", "BTFBM Women Fashion Ruched Elegant Bodycon Long Sleeve Wrap Front Solid Color Casual Basic Fitted Short Dress", "Core 10 Women's Spectrum Yoga High Waist Full-Length Legging", "The Drop Women's Reversible Sherpa Jacket"
+        "Women's Lightweight Long-Sleeve Full-Zip Hooded Jacket", "Pinzon Terry Bathrobe 100% Cotton", "Women's Studio Terry Jogger Pant", "Women's Classic Fit Long-Sleeve V-Neck Sweater", "Women's Blake Long Blazer", "BTFBM Women Elegant Long Sleeve Casual Short Dress", "Core 10 Women's Spectrum Yoga Legging", "The Drop Women's Reversible Sherpa Jacket"
     ];
 
     protected static $jewelry = [
-        "AGS Certified 14k White Gold Diamond with Screw Back and Post Stud Earrings", "Sterling Silver Pressed Flower Teardrop Earrings", "14k Yellow Gold-Filled Engraved Flowers Heart Locket", "Sterling Silver Filigree Hoop Earrings", "10k Diamond Pendant Necklace", "Sterling Silver Diamond Band Ring", "Platinum-Plated Sterling Silver Swarovski Zirconia Flower Halo Ring", "Plated Sterling Silver Filigree Ball Leverback Dangle Earrings",
+        "AGS Certified 14k White Gold Diamond Earrings", "Sterling Silver Earrings", "14k Yellow Gold-Filled Heart Locket", "Sterling Silver Filigree Hoop Earrings", "10k Diamond Pendant Necklace", "Sterling Silver Diamond Band Ring", "Platinum-Plated Sterling Zirconia Halo Ring", "Plated Sterling Dangle Earrings",
     ];
 
     protected static $watches = [
-        "Breguet Double Tourbillon Rose Gold Watch", "Franck Muller Vanguard Mens Automatic 18K Rose Gold Skeleton Blue Face Blue Rubber Strap Watch", "Rolex Sky Dweller Sundust Dial 18kt Everose Gold Mens Watch", "IWC Men's Portuguese Minute Repeater Gold Watch", "Rolex Day-Date 40 President White Gold Watch"
+        "Breguet Double Tourbillon Rose Gold Watch", "Franck Muller Vanguard Watch", "Rolex Sky Dweller Sundust Dial 18kt Watch", "IWC Men's Portuguese Minute Repeater Gold Watch", "Rolex Day-Date 40 President Watch"
     ];
 
     /**

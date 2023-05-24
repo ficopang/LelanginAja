@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
@@ -22,38 +23,38 @@ class ProductFactory extends Factory
         $faker = Faker::create();
 
         $users = DB::table('users')->pluck('id')->toArray();
-        $categories = DB::table('categories')->pluck('id')->toArray();
+        // $categories = DB::table('categories')->pluck('id')->toArray();
         $ecommerce = new Ecommerce($faker);
 
         $categoryNames = [
             'televisions',
-            'mobilePhones',
+            'mobile_phones',
             'laptops',
             'cameras',
-            'mensClothing',
-            'womensClothing',
+            'mens_clothing',
+            'womens_clothing',
             'jewelry',
             'watches',
         ];
 
         $categoryMap = [
             'televisions' => $ecommerce->televisions(),
-            'mobilePhones' => $ecommerce->mobilePhones(),
+            'mobile_phones' => $ecommerce->mobilePhones(),
             'laptops' => $ecommerce->laptops(),
             'cameras' => $ecommerce->cameras(),
-            'mensClothing' => $ecommerce->mensClothing(),
-            'womensClothing' => $ecommerce->womensClothing(),
+            'mens_clothing' => $ecommerce->mensClothing(),
+            'womens_clothing' => $ecommerce->womensClothing(),
             'jewelry' => $ecommerce->jewelry(),
             'watches' => $ecommerce->watches(),
         ];
         $category = $faker->randomElement($categoryNames);
         $imagePath = "public/{$category}";
         $imageFiles = Storage::files($imagePath);
-        $imageUrl = Storage::url($faker->randomElement($imageFiles));
+        $imageUrl = str_replace('/storage', '', Storage::url($faker->randomElement($imageFiles)));
 
         return [
             'user_id' => $faker->randomElement($users),
-            'category_id' => $faker->randomElement($categories),
+            'category_id' => Category::where('name', $category)->first()->id,
             'name' => $categoryMap[$category],
             'description' => $faker->paragraph,
             'starting_price' => $faker->numberBetween(10000, 1000000),
