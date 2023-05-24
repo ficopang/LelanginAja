@@ -51,7 +51,8 @@
                                             <option selected disabled>Select a category</option>
 
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                                <option value="{{ $category['id'] }}" style="text-transform: capitalize;">
+                                                    {{ str_replace('_', ' ', $category['name']) }}</option>
                                             @endforeach
 
                                         </select>

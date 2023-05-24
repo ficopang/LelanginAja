@@ -51,24 +51,25 @@
                         <!-- Start Main Menu Search -->
                         <div class="main-menu-search">
                             <!-- navbar search start -->
-                            <div class="navbar-search search-style-5">
+                            <form class="navbar-search search-style-5" action="/product" method="GET">
                                 <div class="search-select">
                                     <div class="select-position">
-                                        <select id="select1">
-                                            <option selected>All</option>
+                                        <select id="category_id" name="category_id">
+                                            <option value="none" selected>All</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}" style="text-transform: capitalize;">
+                                                    {{ str_replace('_', ' ', $category->name) }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="search-input">
-                                    <input type="text" placeholder="Search">
+                                    <input type="text" id="query" name="query" placeholder="Search">
                                 </div>
                                 <div class="search-btn">
-                                    <button><i class="lni lni-search-alt"></i></button>
+                                    <button type="submit"><i class="lni lni-search-alt"></i></button>
                                 </div>
-                            </div>
+                            </form>
                             <!-- navbar search Ends -->
                         </div>
                         <!-- End Main Menu Search -->
@@ -92,7 +93,7 @@
                                             <span class="total-items">{{ auth()->user()->watchlist->count() }}</span>
                                         </a>
                                         <!-- Shopping Item -->
-                                        <div class="shopping-item">
+                                        <div class="shopping-item" style="z-index: 1000">
                                             <ul class="shopping-list">
                                                 @foreach (auth()->user()->watchlist as $watchlistItem)
                                                     <li>
@@ -124,7 +125,7 @@
                                             <span class="total-items">{{ $wonProducts->count() }}</span>
                                         </a>
                                         <!-- Shopping Item -->
-                                        <div class="shopping-item">
+                                        <div class="shopping-item" style="z-index: 1000;">
                                             <div class="dropdown-cart-header">
                                                 <span>{{ $wonProducts->count() }} Items</span>
                                                 <a href="/cart">View Cart</a>
@@ -189,7 +190,8 @@
                             <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                             <ul class="sub-category">
                                 @foreach ($categories as $category)
-                                    <li><a href="/search/{{ $category->id }}">{{ $category->name }}</a></li>
+                                    <li><a href="/product?category_id={{ $category->id }}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
