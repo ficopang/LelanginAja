@@ -133,7 +133,7 @@
                                                         <div class="content">
                                                             <h3 class="title"><a
                                                                     href="javascript:void(0)">{{ $product->name }}</a></h3>
-                                                            <span class="price">${{ $product->starting_price }}</span>
+                                                            <span class="price">Rp{{ $product->starting_price }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
