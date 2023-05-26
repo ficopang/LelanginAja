@@ -222,7 +222,7 @@
                                             <li class="nav-item"><a href="/account/edit">Account Settings</a></li>
                                             <li class="nav-item"><a href="/account/chat">Chats</a></li>
                                             <li class="nav-item"><a href="/account/withdraw">Withdraw</a></li>
-                                            <li class="nav-item"><a href="/cart">Cart</a></li>
+                                            <li class="nav-item"><a href="/watchlist">Watchlist</a></li>
                                             <li class="nav-item"><a href="/account/transaction">Transaction</a></li>
                                         </ul>
                                     </li>
