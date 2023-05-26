@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WithdrawController;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
@@ -61,9 +62,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/manage', [ProductController::class, 'manage'])->name('products.manage');
 
-    Route::get('/cart', function () {
-        return view('product.cart');
-    })->name('cart');
+    Route::get('/watchlist', function () {
+        return view('product.watchlist');
+    })->name('product.watchlist');
     Route::get('/checkout', [TransactionController::class, 'checkoutPage'])->name('checkout');
 
     Route::get('/account/chat', [ChatController::class, 'openChatPage'])->name('account.chat');
