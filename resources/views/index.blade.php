@@ -2,6 +2,10 @@
 
 @section('custom-header')
     <style>
+.featured-categories .single-category img {
+    width: 50%;
+}
+
         .hero-slider .single-slider img {
             position: absolute;
             right: 0;
