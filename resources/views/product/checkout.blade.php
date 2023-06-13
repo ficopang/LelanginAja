@@ -14,118 +14,122 @@
                             <ul id="accordionExample">
                                 <li>
                                     @if (count($errors) > 0)
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-                                        <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                            aria-expanded="true" aria-controls="collapseFour">Shipping Address</h6>
-                                        <section class="checkout-steps-form-content collapse show" id="collapseFour"
-                                            aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="single-form form-default">
-                                                        <label>Receiver's name</label>
-                                                        <div class="row">
-                                                            <div class="col-md-6 form-input form">
-                                                                <input type="text" placeholder="First Name" name = "firstName">
-                                                            </div>
-                                                            <div class="col-md-6 form-input form">
-                                                                <input type="text" placeholder="Last Name" name="lastName">
-                                                            </div>
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                        aria-expanded="true" aria-controls="collapseFour">Shipping Address</h6>
+                                    <section class="checkout-steps-form-content collapse show" id="collapseFour"
+                                        aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="single-form form-default">
+                                                    <label>Receiver's name</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6 form-input form">
+                                                            <input type="text" placeholder="First Name" name="firstName">
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="single-form form-default">
-                                                        <label>Phone Number</label>
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="Phone Number" name="phoneNumber">
+                                                        <div class="col-md-6 form-input form">
+                                                            <input type="text" placeholder="Last Name" name="lastName">
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="single-form form-default">
-                                                        <label>Mailing Address</label>
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="Mailing Address" name = "address">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="single-form form-default">
-                                                        <label>City</label>
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="City" name="city">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="single-form form-default">
-                                                        <label>Post Code</label>
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="Post Code" name="postalCode">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="single-form form-default">
-                                                        <label>Province</label>
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="Province" name="province">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="checkout-payment-option">
-                                                        <h6 class="heading-6 font-weight-400 payment-title">Select Delivery
-                                                            Option</h6>
-                                                        <div class="payment-option-wrapper">
-                                                            <div class="single-payment-option">
-                                                                <input type="radio" name="shipping" checked id="shipping-1" value = "AnterAja">
-                                                                <label for="shipping-1">
-                                                                    <img src="https://via.placeholder.com/60x32" alt="Sipping">
-                                                                    <p>AnterAja</p>
-                                                                    <span class="price">Rp40000</span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="single-payment-option">
-                                                                <input type="radio" name="shipping" id="shipping-2" value = "JNT">
-                                                                <label for="shipping-2">
-                                                                    <img src="https://via.placeholder.com/60x32" alt="Sipping">
-                                                                    <p>JNT</p>
-                                                                    <span class="price">Rp40000</span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="single-payment-option">
-                                                                <input type="radio" name="shipping" id="shipping-3" value = "SiCepat">
-                                                                <label for="shipping-3">
-                                                                    <img src="https://via.placeholder.com/60x32" alt="Sipping">
-                                                                    <p>SiCepat</p>
-                                                                    <span class="price">Rp40000</span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="single-payment-option">
-                                                                <input type="radio" name="shipping" id="shipping-4" value = "JNE">
-                                                                <label for="shipping-4">
-                                                                    <img src="https://via.placeholder.com/60x32" alt="Sipping">
-                                                                    <p>JNE</p>
-                                                                    <span class="price">Rp40000</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="steps-form-btn button">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </section>
+                                            <div class="col-md-6">
+                                                <div class="single-form form-default">
+                                                    <label>Phone Number</label>
+                                                    <div class="form-input form">
+                                                        <input type="text" placeholder="Phone Number" name="phoneNumber">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="single-form form-default">
+                                                    <label>Mailing Address</label>
+                                                    <div class="form-input form">
+                                                        <input type="text" placeholder="Mailing Address" name="address">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="single-form form-default">
+                                                    <label>City</label>
+                                                    <div class="form-input form">
+                                                        <input type="text" placeholder="City" name="city">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="single-form form-default">
+                                                    <label>Post Code</label>
+                                                    <div class="form-input form">
+                                                        <input type="text" placeholder="Post Code" name="postalCode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="single-form form-default">
+                                                    <label>Province</label>
+                                                    <div class="form-input form">
+                                                        <input type="text" placeholder="Province" name="province">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="checkout-payment-option">
+                                                    <h6 class="heading-6 font-weight-400 payment-title">Select Delivery
+                                                        Option</h6>
+                                                    <div class="payment-option-wrapper">
+                                                        <div class="single-payment-option">
+                                                            <input type="radio" name="shipping" checked id="shipping-1"
+                                                                value="AnterAja">
+                                                            <label for="shipping-1">
+                                                                <img src="https://via.placeholder.com/60x32" alt="Sipping">
+                                                                <p>AnterAja</p>
+                                                                <span class="price">Rp40000</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="single-payment-option">
+                                                            <input type="radio" name="shipping" id="shipping-2"
+                                                                value="JNT">
+                                                            <label for="shipping-2">
+                                                                <img src="https://via.placeholder.com/60x32" alt="Sipping">
+                                                                <p>JNT</p>
+                                                                <span class="price">Rp40000</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="single-payment-option">
+                                                            <input type="radio" name="shipping" id="shipping-3"
+                                                                value="SiCepat">
+                                                            <label for="shipping-3">
+                                                                <img src="https://via.placeholder.com/60x32" alt="Sipping">
+                                                                <p>SiCepat</p>
+                                                                <span class="price">Rp40000</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="single-payment-option">
+                                                            <input type="radio" name="shipping" id="shipping-4"
+                                                                value="JNE">
+                                                            <label for="shipping-4">
+                                                                <img src="https://via.placeholder.com/60x32" alt="Sipping">
+                                                                <p>JNE</p>
+                                                                <span class="price">Rp40000</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="steps-form-btn button">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
 
                                 </li>
                                 <li>
@@ -139,14 +143,15 @@
                                                     <div class="single-form form-default">
                                                         <label>Cardholder Name</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Cardholder Name" name = "cardholderName">
+                                                            <input type="text" placeholder="Cardholder Name"
+                                                                name="cardholderName">
                                                         </div>
                                                     </div>
                                                     <div class="single-form form-default">
                                                         <label>Card Number</label>
                                                         <div class="form-input form">
                                                             <input id="credit-input" type="text"
-                                                                placeholder="0000 0000 0000 0000" name = "cardNumber">
+                                                                placeholder="0000 0000 0000 0000" name="cardNumber">
                                                             <img src="assets/images/payment/card.png" alt="card">
                                                         </div>
                                                     </div>
@@ -155,10 +160,10 @@
                                                             <label>Expiration</label>
                                                             <div class="expiration d-flex">
                                                                 <div class="form-input form">
-                                                                    <input type="text" placeholder="MM" name = month>
+                                                                    <input type="text" placeholder="MM" name=month>
                                                                 </div>
                                                                 <div class="form-input form">
-                                                                    <input type="text" placeholder="YYYY" name = year>
+                                                                    <input type="text" placeholder="YYYY" name=year>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -166,7 +171,7 @@
                                                             <label>CVC/CVV <span><i
                                                                         class="mdi mdi-alert-circle"></i></span></label>
                                                             <div class="form-input form">
-                                                                <input type="text" placeholder="***" name = "cvc">
+                                                                <input type="text" placeholder="***" name="cvc">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -202,8 +207,8 @@
                                 <div class="sub-total-price">
                                     @foreach ($wonProducts as $wonProduct)
                                         <div class="total-price">
-                                            <p class="value">{{$wonProduct->name}}</p>
-                                            <p class="price">Rp{{$wonProduct->getTotalBidAmount()}}</p>
+                                            <p class="value">{{ $wonProduct->name }}</p>
+                                            <p class="price">Rp{{ $wonProduct->getTotalBidAmount() }}</p>
                                         </div>
                                     @endforeach
                                     <div class="total-price shipping">
@@ -215,7 +220,7 @@
                                 <div class="total-payable">
                                     <div class="payable-price">
                                         <p class="value">Subotal Price:</p>
-                                        <p class="price">Rp{{$totalBidAmount + 40000}}</p>
+                                        <p class="price">Rp{{ $totalBidAmount + 40000 }}</p>
                                     </div>
                                 </div>
                             </div>

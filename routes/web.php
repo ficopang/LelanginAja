@@ -5,6 +5,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WithdrawController;
@@ -106,3 +107,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout', [TransactionController::class, 'saveShippingAddres']);
 });
 Route::get('/product/{productId}/info', [BidController::class, 'getProductInfo']);
+Route::get('/storages/{folder}/{filename}', [StorageController::class, 'show'])->name('storage.show');

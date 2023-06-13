@@ -2,9 +2,9 @@
 
 @section('custom-header')
     <style>
-.featured-categories .single-category img {
-    width: 50%;
-}
+        .featured-categories .single-category img {
+            width: 50%;
+        }
 
         .hero-slider .single-slider img {
             position: absolute;
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                     <div class="images">
-                                        <img src="{{ asset('storage/' . $cr->image_url) }}" alt="#">
+                                        <img src="{{ asset('storage' . $cr->image_url) }}" alt="#">
                                     </div>
                                 </div>
                             @endforeach
@@ -95,7 +95,7 @@
                                     <h3>{{ 'Rp' . $smallBanner->getTotalBidAmount() }}</h3>
                                 </div>
                                 <div class="images">
-                                    <img src="{{ asset('storage/' . $smallBanner->image_url) }}" alt="#">
+                                    <img src="{{ asset('storage' . $smallBanner->image_url) }}" alt="#">
                                 </div>
                             </div>
                             <!-- End Small Banner -->
@@ -151,7 +151,7 @@
                                 <li><a href="/product?category_id={{ $cat->id }}">View All</a></li>
                             </ul>
                             <div class="images">
-                                <img src="{{ asset('storage/' . $cat->products()->first()->image_url) }}" alt="#" />
+                                <img src="{{ asset('storage' . $cat->products()->first()->image_url) }}" alt="#" />
                             </div>
                         </div>
                         <!-- End Single Category -->
@@ -183,7 +183,7 @@
                         <!-- Start Single Product -->
                         <div class="single-product">
                             <div class="product-image">
-                                <img src="{{ asset('storage/' . $tp->image_url) }}" alt="#" />
+                                <img src="{{ asset('storage' . $tp->image_url) }}" alt="#" />
                                 <div class="button">
                                     <a href="/product/{{ $tp->id }}" class="btn"><i class="lni lni-cart"></i>Bid
                                         now!</a>
@@ -230,7 +230,7 @@
                                 <!-- Start Single Product -->
                                 <div class="single-product">
                                     <div class="product-image">
-                                        <img src="{{ asset('storage/' . $offers->image_url) }}" alt="#" />
+                                        <img src="{{ asset('storage' . $offers->image_url) }}" alt="#" />
                                         <div class="button">
                                             <a href="/product/{{ $offers->id }}" class="btn"><i
                                                     class="lni lni-cart"></i> Bid
@@ -272,7 +272,7 @@
                             </div>
                         </div>
                         <div class="images">
-                            <img src="{{ asset('storage/' . $banner->image_url) }}" alt="#">
+                            <img src="{{ asset('storage' . $banner->image_url) }}" alt="#">
                         </div>
                     </div>
                     <!-- End Banner -->
@@ -280,7 +280,7 @@
                 <div class="col-lg-4 col-md-12 col-12">
                     <div class="offer-content">
                         <div class="image">
-                            <img src="{{ asset('storage/' . $offer->image_url) }}" alt="#" />
+                            <img src="{{ asset('storage' . $offer->image_url) }}" alt="#" />
                             <span class="sale-tag">-50%</span>
                         </div>
                         <div class="text">
@@ -336,7 +336,7 @@
                         <div class="single-list">
                             <div class="list-image">
                                 <a href="/product/{{ $bs->id }}"><img
-                                        src="{{ asset('storage/' . $bs->image_url) }}" alt="#" /></a>
+                                        src="{{ asset('storage' . $bs->image_url) }}" alt="#" /></a>
                             </div>
                             <div class="list-info">
                                 <h3>
@@ -355,7 +355,7 @@
                         <div class="single-list">
                             <div class="list-image">
                                 <a href="/product/{{ $newarr->id }}"><img
-                                        src="{{ asset('storage/' . $newarr->image_url) }}" alt="#" /></a>
+                                        src="{{ asset('storage' . $newarr->image_url) }}" alt="#" /></a>
                             </div>
                             <div class="list-info">
                                 <h3>
@@ -374,7 +374,7 @@
                         <div class="single-list">
                             <div class="list-image">
                                 <a href="/product/{{ $tr->id }}"><img
-                                        src="{{ asset('storage/' . $tr->image_url) }}" alt="#" /></a>
+                                        src="{{ asset('storage' . $tr->image_url) }}" alt="#" /></a>
                             </div>
                             <div class="list-info">
                                 <h3>

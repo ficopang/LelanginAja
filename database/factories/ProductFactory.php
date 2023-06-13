@@ -31,10 +31,10 @@ class ProductFactory extends Factory
             'mobile_phones',
             'laptops',
             'cameras',
-            'mens_clothing',
-            'womens_clothing',
-            'jewelry',
-            'watches',
+            // 'mens_clothing',
+            // 'womens_clothing',
+            // 'jewelry',
+            // 'watches',
         ];
 
         $categoryMap = [
@@ -42,10 +42,10 @@ class ProductFactory extends Factory
             'mobile_phones' => $ecommerce->mobilePhones(),
             'laptops' => $ecommerce->laptops(),
             'cameras' => $ecommerce->cameras(),
-            'mens_clothing' => $ecommerce->mensClothing(),
-            'womens_clothing' => $ecommerce->womensClothing(),
-            'jewelry' => $ecommerce->jewelry(),
-            'watches' => $ecommerce->watches(),
+            // 'mens_clothing' => $ecommerce->mensClothing(),
+            // 'womens_clothing' => $ecommerce->womensClothing(),
+            // 'jewelry' => $ecommerce->jewelry(),
+            // 'watches' => $ecommerce->watches(),
         ];
         $category = $faker->randomElement($categoryNames);
         $imagePath = "public/{$category}";
@@ -59,7 +59,10 @@ class ProductFactory extends Factory
             'description' => $faker->paragraph,
             'starting_price' => $faker->numberBetween(10000, 1000000),
             'min_bid_increment' => $faker->numberBetween(1000, 100000),
+            'min_bid_users' => $faker->numberBetween(1, 3),
             'image_url' => $imageUrl,
+            'reset_time' => 30,
+            'start_time' => $faker->dateTimeBetween('now', '+1 week'),
             'start_time' => $faker->dateTimeBetween('now', '+1 week'),
             'end_time' => $faker->dateTimeBetween('+1 week', '+2 weeks'),
             'created_at' => now(),

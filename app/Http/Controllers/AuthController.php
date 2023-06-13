@@ -53,6 +53,7 @@ class AuthController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->phone_number = $request->phone;
+        $user->balance = 100000;
         $user->address = $request->address;
         $user->password = Hash::make($request->password);
         $user->save();
@@ -62,25 +63,26 @@ class AuthController extends Controller
 
     public function create(array $data)
     {
-      return User::create([
-        'first_name' => $data['first_name'],
-        'last_name' => $data['last_name'],
-        'email' => $data['email'],
-        'phone' => $data['phone'],
-        'password' => Hash::make($data['password'])
-      ]);
+        return User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'password' => Hash::make($data['password'])
+        ]);
     }
 
     public function dashboard()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return view('dashboard');
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
-    public function signOut() {
+    public function signOut()
+    {
         Session::flush();
         Auth::logout();
 

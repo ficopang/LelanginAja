@@ -36,7 +36,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-5 col-md-5 col-12">
                                     <div class="item-image">
-                                        <img src="{{ asset('storage/' . $tr->product->image_url) }}" alt="#"
+                                        <img src="{{ asset('storage' . $tr->product->image_url) }}" alt="#"
                                             data-pagespeed-url-hash="3023132953"
                                             onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
                                         <div class="content">
@@ -71,7 +71,7 @@
                                     <li>Description: {{ $tr->product->description }}</li>
                                     <li>Starting Price: {{ 'Rp' . $tr->product->starting_price }}</li>
                                     <li>Min Bid Increment: {{ 'Rp' . $tr->product->min_bid_increment }}</li>
-                                    <li>Image: <img src="{{ asset('storage/' . $tr->product->image_url) }}" alt="Product 1"
+                                    <li>Image: <img src="{{ asset('storage' . $tr->product->image_url) }}" alt="Product 1"
                                             width="100"></li>
                                     <li>Start Time: {{ $tr->product->start_time }}</li>
                                     <li>End Time: {{ $tr->product->end_time }}</li>

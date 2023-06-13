@@ -32,10 +32,10 @@ class CategorySeeder extends Seeder
             ['name' => 'mobile_phones'],
             ['name' => 'laptops'],
             ['name' => 'cameras'],
-            ['name' => 'mens_clothing'],
-            ['name' => 'womens_clothing'],
-            ['name' => 'jewelry'],
-            ['name' => 'watches'],
+            // ['name' => 'mens_clothing'],
+            // ['name' => 'womens_clothing'],
+            // ['name' => 'jewelry'],
+            // ['name' => 'watches'],
         ];
 
         DB::table('categories')->insert($categories);

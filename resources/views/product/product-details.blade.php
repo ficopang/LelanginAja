@@ -12,8 +12,8 @@
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
-                                    <img src="{{ asset('storage/' . $product->image_url) }}" id="current" alt="#">
-                                    {{-- <img src="{{ asset('storage/' . $product->image_url) }}" id="current" alt="#"> --}}
+                                    <img src="{{ asset('storage' . $product->image_url) }}" id="current" alt="#">
+                                    {{-- <img src="{{ asset('storage' . $product->image_url) }}" id="current" alt="#"> --}}
                                 </div>
                                 {{-- <div class="images">
                                     <img src="https://via.placeholder.com/1000x670" class="img" alt="#">

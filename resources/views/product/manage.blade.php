@@ -63,13 +63,18 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="starting-price" class="form-label">Starting Price</label>
-                                        <input type="number" class="form-control" id="starting-price" name="starting-price"
-                                            required step="1000">
+                                        <input type="number" min="0" class="form-control" id="starting-price"
+                                            name="starting-price" required step="1000">
                                     </div>
                                     <div class="mb-3">
                                         <label for="min-bid-increment" class="form-label">Minimum Bid Increment</label>
                                         <input type="number" class="form-control" id="min-bid-increment"
-                                            name="min-bid-increment" required step="1000">
+                                            name="min-bid-increment" min="1" required step="1000">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="min-bid-users" class="form-label">Minimum Bid User(s)</label>
+                                        <input type="number" min="1" class="form-control" id="min-bid-users"
+                                            name="min-bid-users" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="product-image" class="form-label">Product Image</label>
@@ -77,9 +82,14 @@
                                             accept="image/*" required>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="reset-time" class="form-label">Reset Time (second)</label>
+                                        <input type="number" min="0" class="form-control" id="reset-time"
+                                            name="reset-time" required step="30">
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="start-time" class="form-label">Start Time</label>
-                                        <input type="datetime-local" class="form-control" id="start-time" name="start-time"
-                                            required>
+                                        <input type="datetime-local" class="form-control" id="start-time"
+                                            name="start-time" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="end-time" class="form-label">End Time</label>
@@ -179,10 +189,12 @@
                                                 <ul>
                                                     <li>Name: {{ $product->name }}</li>
                                                     <li>Description: {{ $product->description }}</li>
-                                                    <li>Starting Price: ${{ $product->starting_price }}</li>
-                                                    <li>Min Bid Increment: ${{ $product->min_bid_increment }}</li>
+                                                    <li>Starting Price: Rp.{{ $product->starting_price }}</li>
+                                                    <li>Min Bid Increment: Rp.{{ $product->min_bid_increment }}</li>
+                                                    <li>Min User: {{ $product->min_bid_users }}</li>
                                                     <li>Image: <img src="{{ asset('storage/' . $product->image_url) }}"
                                                             alt="{{ $product->name }}" width="100"></li>
+                                                    <li>Reset Time: {{ $product->reset_time }} second(s)</li>
                                                     <li>Start Time: {{ $product->start_time }}</li>
                                                     <li>End Time: {{ $product->end_time }}</li>
 

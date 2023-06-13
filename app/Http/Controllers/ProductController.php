@@ -38,7 +38,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::paginate(2);
+        $user = User::find(auth()->id());
+        $products = $user->products()->paginate(4);
         $categories = Category::all();
         return view('product.manage', compact('products', 'categories'));
     }
@@ -92,7 +93,9 @@ class ProductController extends Controller
             'product-description' => 'required',
             'starting-price' => 'required|numeric',
             'min-bid-increment' => 'required|numeric',
+            'min-bid-users' => 'required|numeric',
             'product-image' => 'required|image',
+            'reset-time' => 'required|numeric',
             'start-time' => 'required|date',
             'end-time' => 'required|date',
         ]);
@@ -104,12 +107,14 @@ class ProductController extends Controller
         $products->description = $validatedData['product-description'];
         $products->starting_price = $validatedData['starting-price'];
         $products->min_bid_increment = $validatedData['min-bid-increment'];
+        $products->min_bid_users = $validatedData['min-bid-users'];
 
         if ($request->hasFile('product-image')) {
             $image = $request->file('product-image');
             $imagePath = $image->store('product-images', 'public');
             $products->image_url = $imagePath;
         }
+        $products->reset_time = $validatedData['reset-time'];
         $products->start_time = $validatedData['start-time'];
         $products->end_time = $validatedData['end-time'];
 
@@ -129,7 +134,9 @@ class ProductController extends Controller
             'product-description' => 'required',
             'starting-price' => 'required|numeric',
             'min-bid-increment' => 'required|numeric',
+            'min-bid-users' => 'required|numeric',
             'product-image' => 'required|image',
+            'reset-time' => 'required|numeric',
             'start-time' => 'required|date',
             'end-time' => 'required|date',
         ]);
@@ -139,12 +146,14 @@ class ProductController extends Controller
         $product->description = $request->input('product-description');
         $product->starting_price = $request->input('starting-price');
         $product->min_bid_increment = $request->input('min-bid-increment');
+        $product->min_bid_users = $request->input('min-bid-users');
 
         if ($request->hasFile('product-image')) {
             $image = $request->file('product-image');
             $imagePath = $image->store('product-images', 'public');
             $product->image_url = $imagePath;
         }
+        $product->reset_time = $validatedData['reset-time'];
         $product->start_time = $validatedData['start-time'];
         $product->end_time = $validatedData['end-time'];
 
@@ -171,8 +180,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
+        $categories = Category::all();
 
-        return view('product.edit', compact('product'));
+        return view('product.edit', compact('product', 'categories'));
     }
 
     public function toggleWatchlist($productId)

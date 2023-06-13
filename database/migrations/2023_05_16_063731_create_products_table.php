@@ -19,7 +19,9 @@ return new class extends Migration
             $table->text('description');
             $table->bigInteger('starting_price');
             $table->bigInteger('min_bid_increment');
+            $table->bigInteger('min_bid_users');
             $table->text('image_url');
+            $table->bigInteger('reset_time');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->timestamps();

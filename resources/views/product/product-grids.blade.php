@@ -80,7 +80,7 @@
                                             <!-- Start Single Product -->
                                             <div class="single-product">
                                                 <div class="product-image">
-                                                    <img src="{{ asset('storage/' . $product->image_url) }}" alt="#">
+                                                    <img src="{{ asset('storage' . $product->image_url) }}" alt="#">
                                                     <div class="button">
                                                         <a href="/product/{{ $product->id }}" class="btn"><i
                                                                 class="lni lni-cart"></i>
@@ -159,7 +159,7 @@
                                                 <div class="row align-items-center">
                                                     <div class="col-lg-4 col-md-4 col-12">
                                                         <div class="product-image">
-                                                            <img src="{{ asset('storage/' . $product->image_url) }}"
+                                                            <img src="{{ asset('storage' . $product->image_url) }}"
                                                                 alt="#">
                                                             <div class="button">
                                                                 <a href=""/product/{{ $product->id }}"

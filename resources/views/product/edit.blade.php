@@ -36,18 +36,28 @@
             </div>
             <div class="mb-3">
                 <label for="starting-price" class="form-label">Starting Price</label>
-                <input type="number" class="form-control" id="starting-price" name="starting-price"
+                <input type="number" min="0" class="form-control" id="starting-price" name="starting-price"
                     value="{{ $product->starting_price }}" required step="1000">
             </div>
             <div class="mb-3">
                 <label for="min-bid-increment" class="form-label">Minimum Bid Increment</label>
-                <input type="number" class="form-control" id="min-bid-increment" name="min-bid-increment"
+                <input type="number" min="1" class="form-control" id="min-bid-increment" name="min-bid-increment"
                     value="{{ $product->min_bid_increment }}" required step="1000">
+            </div>
+            <div class="mb-3">
+                <label for="min-bid-users" class="form-label">Minimum Bid Users</label>
+                <input type="number" min="1" class="form-control" id="min-bid-users" name="min-bid-users"
+                    value="{{ $product->min_bid_users }}" required step="1">
             </div>
             <div class="mb-3">
                 <label for="product-image" class="form-label">Product Image</label>
                 <input type="file" class="form-control" id="product-image" name="product-image" accept="image/*"
                     required>
+            </div>
+            <div class="mb-3">
+                <label for="reset-time" class="form-label">Reset Time</label>
+                <input type="number" min="0" class="form-control" id="reset-time" name="reset-time"
+                    value="{{ $product->reset_time }}" required step="30">
             </div>
             <div class="mb-3">
                 <label for="start-time" class="form-label">Start Time</label>
