@@ -9,7 +9,6 @@ use App\Http\Controllers\StorageController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WithdrawController;
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,9 +46,6 @@ Route::get(
     '/product',
     [ProductController::class, 'list']
 )->name('product.list');
-// Route::get('/product/list', function () {
-//     return view('product.product-list');
-// })->name('product.list');
 Route::get('/product/{productId}', [ProductController::class, 'detail'])->name('product.details');
 
 Route::middleware(['auth'])->group(function () {

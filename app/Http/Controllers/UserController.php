@@ -88,7 +88,5 @@ class UserController extends Controller
         else {
             return back()->withErrors('Wrong password');
         }
-
-
     }
 }

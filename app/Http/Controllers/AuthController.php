@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    public function index()
-    {
-        return view('auth.login');
-    }
-
     public function customLogin(Request $request)
     {
         $request->validate([
@@ -29,11 +24,6 @@ class AuthController extends Controller
         }
 
         return back()->withErrors('Email or password not valid');
-    }
-
-    public function registration()
-    {
-        return view('auth.register');
     }
 
     public function customRegistration(Request $request)
