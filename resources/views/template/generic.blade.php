@@ -97,8 +97,6 @@
                                             <ul class="shopping-list">
                                                 @foreach (auth()->user()->watchlist as $watchlistItem)
                                                     <li>
-                                                        <a href="javascript:void(0)" class="remove"
-                                                            title="Remove this item"><i class="lni lni-close"></i></a>
                                                         <div class="cart-img-head">
                                                             <a class="cart-img"
                                                                 href="/product/{{ $watchlistItem->product->id }}"><img
@@ -190,7 +188,8 @@
                             <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                             <ul class="sub-category">
                                 @foreach ($categories as $category)
-                                    <li><a href="/product?category_id={{ $category->id }}">{{ $category->name }}</a>
+                                    <li><a
+                                            href="/product?category_id={{ $category->id }}">{{ str_replace('_', ' ', $category->name) }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -381,8 +380,10 @@
                             <div class="single-footer f-link">
                                 <h3>Categories</h3>
                                 <ul>
-                                    @for ($i = 1; isset($categories[$i]) && $i <= 5; $i++)
-                                        <li><a href="{{ $categories[$i]->id }}">{{ $categories[$i]->name }}</a></li>
+                                    @for ($i = 0; isset($categories[$i]) && $i <= 4; $i++)
+                                        <li><a
+                                                href="{{ $categories[$i]->id }}">{{ str_replace('_', ' ', $categories[$i]->name) }}</a>
+                                        </li>
                                     @endfor
                                 </ul>
                             </div>

@@ -57,12 +57,12 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
+                        {{-- <tfoot>
                             <tr>
                                 <td colspan="2"><strong>Total</strong></td>
                                 <td>$1000.00</td>
                             </tr>
-                        </tfoot>
+                        </tfoot> --}}
                     </table>
                 </div>
             </div>

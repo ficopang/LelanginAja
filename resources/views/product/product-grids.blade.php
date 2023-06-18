@@ -82,9 +82,8 @@
                                                 <div class="product-image">
                                                     <img src="{{ asset('storage' . $product->image_url) }}" alt="#">
                                                     <div class="button">
-                                                        <a href="/product/{{ $product->id }}" class="btn"><i
-                                                                class="lni lni-cart"></i>
-                                                            Bid Now!</a>
+                                                        <a href="/product/{{ $product->id }}" class="btn">
+                                                            Bid</a>
                                                     </div>
                                                 </div>
                                                 <div class="product-info">

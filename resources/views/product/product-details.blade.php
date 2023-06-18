@@ -62,7 +62,7 @@
                             <div class="row">
                                 <div class="col-sm-6 col-12">
                                     <input type="number" class="form-control" id="bid-amount" name="bid-amount" required
-                                        step="{{ $product->min_bid_increment }}"
+                                        step="{{ $product->min_bid_increment }}" min="{{ $product->min_bid_increment }}"
                                         value="{{ $product->min_bid_increment }}">
                                 </div>
                                 <div class="col-sm-6 col-12">
@@ -119,6 +119,7 @@
 @endsection
 
 @section('custom-js')
+    <script src="{{ asset('assets/js/vanilla-toast.min.js') }}"></script>
     <script type="text/javascript">
         const current = document.getElementById("current");
         const opacity = 0.6;
@@ -157,6 +158,8 @@
             // Update the countdown element
         }
 
+        lastBidder =
+            '{{ $product->bids()->latest('created_at')->first()? $product->bids()->latest('created_at')->first()->user->first_name: '' }}'
         // Function to make XHR request and update the countdown and last bidder's first name
         function updateProductInfo() {
             const xhr = new XMLHttpRequest();
@@ -180,6 +183,17 @@
                         const lastBidderElement = document.getElementById('last-bidder');
                         if (response.last_bidder_first_name) {
                             lastBidderElement.textContent = ' - ' + lastBidderFirstName;
+
+                            if (lastBidder != response.last_bidder_first_name) {
+                                vt.info("Current price: Rp" + currentPrice, {
+                                    title: lastBidderFirstName + 'just place a bid',
+                                    position: "top-right",
+                                    duration: 2000,
+                                    closable: true
+                                });
+
+                                lastBidder = lastBidderFirstName;
+                            }
                         }
                     }
                 }
@@ -198,7 +212,12 @@
     <script>
         function placeBid(productId) {
             @guest
-            alert('Please login to place bid')
+            vt.error('Please login first to place a bid', {
+                title: "Error",
+                position: "top-right",
+                duration: 2000,
+                closable: true
+            });
         @endguest
 
         var bidAmount = document.getElementById('bid-amount').value;
@@ -221,9 +240,30 @@
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
                 // alert(response.message);
+
+                if (!response.error) {
+                    vt.success(response.message, {
+                        title: "Success",
+                        position: "top-right",
+                        duration: 2000,
+                        closable: true
+                    });
+                } else {
+                    vt.error(response.error, {
+                        title: "Error",
+                        position: "top-right",
+                        duration: 2000,
+                        closable: true
+                    });
+                }
             } else {
                 var error = JSON.parse(xhr.responseText);
-                alert(error.error);
+                vt.error(error.error, {
+                    title: "Error",
+                    position: "top-right",
+                    duration: 2000,
+                    closable: true
+                });
             }
         };
 

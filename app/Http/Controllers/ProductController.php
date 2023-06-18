@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Watchlist;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ProductController extends Controller
 
         $trendingProduct = Product::withCount('bids')
             ->orderBy('bids_count', 'desc')
-            ->take(8)
+            ->take(4)
             ->get();
 
         $specialOffer = Product::orderBy('start_time', 'asc')->limit(3)->get();

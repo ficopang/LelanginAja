@@ -3,14 +3,14 @@
 @section('custom-header')
     <style>
         .featured-categories .single-category img {
-            width: 50%;
+            width: 40%;
         }
 
         .hero-slider .single-slider img {
             position: absolute;
-            right: 0;
+            right: 5%;
             top: 50%;
-            width: 50%;
+            width: 40%;
             -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
             z-index: 10;
@@ -29,12 +29,21 @@
 
         .single-banner img {
             position: absolute;
-            left: 0;
+            left: 5%;
             top: 50%;
-            width: 50%;
+            width: 40%;
             -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
             z-index: 10;
+        }
+
+        .ellipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* number of lines to show */
+            -webkit-box-orient: vertical;
         }
     </style>
 @endsection
@@ -56,11 +65,10 @@
                                     background-image: url({{ asset('assets/images/banner/home.jpg') }});
                                 ">
                                     <div class="content" style="z-index: 11;">
-                                        <h2>
-                                            <span>Bid starting from {{ 'Rp' . $cr->min_bid_increment }}</span>
+                                        <h2 class="fs-2">
                                             {{ $cr->name }}
                                         </h2>
-                                        <p>
+                                        <p class="ellipsis">
                                             {{ $cr->description }}
                                         </p>
                                         <h3><span>Starting from</span>{{ 'Rp' . $cr->starting_price }}</h3>
@@ -88,8 +96,7 @@
                                 background-image: url({{ asset('assets/images/banner/home.jpg') }});
                             ">
                                 <div class="content" style="z-index: 11">
-                                    <h2>
-                                        <span>Bid starting from {{ 'Rp' . $smallBanner->min_bid_increment }}</span>
+                                    <h2 class="col-5">
                                         {{ $smallBanner->name }}
                                     </h2>
                                     <h3>{{ 'Rp' . $smallBanner->getTotalBidAmount() }}</h3>
@@ -104,13 +111,12 @@
                             <!-- Start Small Banner -->
                             <div class="hero-small-banner style2">
                                 <div class="content">
-                                    <h2>Weekly Sale!</h2>
+                                    <h2>Tuesday Funday</h2>
                                     <p>
-                                        Saving up to 50% off all online store items
-                                        this week.
+                                        Free shipping only on Tuesday! (min Rp200000)
                                     </p>
                                     <div class="button">
-                                        <a class="btn" href="/product">Shop Now</a>
+                                        <a class="btn" href="/product">Bid Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -130,17 +136,12 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2>Featured Categories</h2>
-                        <p>
-                            There are many variations of passages of Lorem Ipsum
-                            available, but the majority have suffered alteration in
-                            some form.
-                        </p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 @foreach ($categories as $cat)
-                    <div class="col-lg-4 col-md-6 col-12">
+                    <div class="col-lg-6 col-md-6 col-12">
                         <!-- Start Single Category -->
                         <div class="single-category">
                             <h3 class="heading" style="text-transform: capitalize;">{{ str_replace('_', ' ', $cat->name) }}
@@ -169,33 +170,35 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2>Trending Product</h2>
-                        <p>
-                            There are many variations of passages of Lorem Ipsum
-                            available, but the majority have suffered alteration in
-                            some form.
-                        </p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 @foreach ($trendingProduct as $tp)
-                    <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch">
                         <!-- Start Single Product -->
                         <div class="single-product">
+                            <h4 class="title mt-2 mx-2 fw-bold text-center">
+                                <a class="d-inline-block text-truncate" style="max-width: 150px;"
+                                    href="/product/{{ $tp->id }}">{{ $tp->name }}</a>
+                            </h4>
                             <div class="product-image">
                                 <img src="{{ asset('storage' . $tp->image_url) }}" alt="#" />
-                                <div class="button">
-                                    <a href="/product/{{ $tp->id }}" class="btn"><i class="lni lni-cart"></i>Bid
-                                        now!</a>
-                                </div>
                             </div>
-                            <div class="product-info">
-                                <span class="category">{{ $tp->category->name }}</span>
-                                <h4 class="title">
-                                    <a href="/product/{{ $tp->id }}">{{ $tp->name }}</a>
-                                </h4>
+                            <div class="product-info d-flex flex-column">
+                                <span class="category">{{ str_replace('_', ' ', $tp->category->name) }}</span>
+                                <div class="countdown text-center text-danger fs-4" data-end-time="{{ $tp->end_time }}">
+                                    <h5>{{ $tp->end_time }}</h5>
+                                </div>
                                 <div class="price">
                                     <span>{{ 'Rp' . $tp->getTotalBidAmount() }}</span>
+                                </div>
+                                <div class="last-bidder">
+                                    <span
+                                        class="text-dark text-muted">{{ $tp->bids()->latest('created_at')->first()? 'Bidder: ' .$tp->bids()->latest('created_at')->first()->user->first_name: '' }}</span>
+                                </div>
+                                <div class="button mt-auto">
+                                    <a href="/product/{{ $tp->id }}" class="btn w-100">Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -214,11 +217,6 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2>Special Offer</h2>
-                        <p>
-                            There are many variations of passages of Lorem Ipsum
-                            available, but the majority have suffered alteration in
-                            some form.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -226,24 +224,31 @@
                 <div class="col-lg-8 col-md-12 col-12">
                     <div class="row">
                         @foreach ($specialOffer as $offers)
-                            <div class="col-lg-4 col-md-4 col-12">
+                            <div class="col-lg-4 col-md-4 col-12 d-flex align-items-stretch">
                                 <!-- Start Single Product -->
                                 <div class="single-product">
+                                    <h4 class="title mt-2 mx-2 fw-bold text-center">
+                                        <a class="d-inline-block text-truncate" style="max-width: 150px;"
+                                            href="/product/{{ $offers->id }}">{{ $offers->name }}</a>
+                                    </h4>
                                     <div class="product-image">
                                         <img src="{{ asset('storage' . $offers->image_url) }}" alt="#" />
-                                        <div class="button">
-                                            <a href="/product/{{ $offers->id }}" class="btn"><i
-                                                    class="lni lni-cart"></i> Bid
-                                                Now!</a>
-                                        </div>
                                     </div>
                                     <div class="product-info">
-                                        <span class="category">{{ $offers->category->name }}</span>
-                                        <h4 class="title">
-                                            <a href="/product/{{ $offers->id }}">{{ $offers->name }}</a>
-                                        </h4>
+                                        <span class="category">{{ str_replace('_', ' ', $offers->category->name) }}</span>
+                                        <div class="countdown text-center text-danger fs-5"
+                                            data-end-time="{{ $offers->end_time }}">
+                                            <h6>{{ $offers->end_time }}</h6>
+                                        </div>
                                         <div class="price">
                                             <span>{{ 'Rp' . $offers->getTotalBidAmount() }}</span>
+                                        </div>
+                                        <div class="last-bidder">
+                                            <span
+                                                class="text-dark text-muted">{{ $offers->bids()->latest('created_at')->first()? 'Bidder: ' .$offers->bids()->latest('created_at')->first()->user->first_name: '' }}</span>
+                                        </div>
+                                        <div class="button mt-auto">
+                                            <a href="/product/{{ $tp->id }}" class="btn w-100">Bid</a>
                                         </div>
                                     </div>
                                 </div>
@@ -329,8 +334,8 @@
     <section class="home-product-list section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-12 custom-responsive-margin">
-                    <h4 class="list-title">Best Sellers</h4>
+                <div class="col-lg-6 col-md-6 col-12 custom-responsive-margin">
+                    <h4 class="list-title">Closest Auction</h4>
                     @foreach ($bestSellers as $bs)
                         <!-- Start Single List -->
                         <div class="single-list">
@@ -348,7 +353,7 @@
                         <!-- End Single List -->
                     @endforeach
                 </div>
-                <div class="col-lg-4 col-md-4 col-12 custom-responsive-margin">
+                <div class="col-lg-6 col-md-6 col-12 custom-responsive-margin">
                     <h4 class="list-title">New Arrivals</h4>
                     <!-- Start Single List -->
                     @foreach ($newArrivals as $newarr)
@@ -367,7 +372,7 @@
                     @endforeach
                     <!-- End Single List -->
                 </div>
-                <div class="col-lg-4 col-md-4 col-12">
+                {{-- <div class="col-lg-4 col-md-4 col-12">
                     <h4 class="list-title">Top Rated</h4>
                     <!-- Start Single List -->
                     @foreach ($topRated as $tr)
@@ -385,7 +390,7 @@
                         </div>
                         <!-- End Single List -->
                     @endforeach
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -509,5 +514,38 @@
         }
         timer();
         setInterval(timer, 1000);
+    </script>
+    <script>
+        // Countdown Timers
+        var countdowns = document.querySelectorAll('.countdown');
+
+        countdowns.forEach(function(countdown) {
+            var endTime = new Date(countdown.dataset.endTime).getTime();
+            var now = new Date().getTime();
+            var timeRemaining = endTime - now;
+
+            function updateCountdown() {
+                var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                // Format the countdown timer
+                var formattedCountdown = days.toString().padStart(2, '0') + ':' +
+                    hours.toString().padStart(2, '0') + ':' +
+                    minutes.toString().padStart(2, '0') + ':' +
+                    seconds.toString().padStart(2, '0');
+
+                countdown.innerHTML = formattedCountdown;
+
+                if (timeRemaining <= 0) {
+                    countdown.innerHTML = "Auction Ended";
+                } else {
+                    timeRemaining -= 1000;
+                    setTimeout(updateCountdown, 1000);
+                }
+            }
+            updateCountdown();
+        });
     </script>
 @endsection

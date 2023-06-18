@@ -37,6 +37,10 @@ class BidController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
+        if ($request->input('bid_amount') % $product->min_bid_increment != 0) {
+            return response()->json(['error' => 'Bid value must be multiply of bid increment'], 400);
+        }
+
 
         // Check if bid time is within 30 seconds of the end time
         $endTime = Carbon::parse($product->end_time);
@@ -46,8 +50,8 @@ class BidController extends Controller
         if ($bidTime->greaterThan($endTime)) {
             return response()->json(['error' => 'Time limit exceeded'], 400);
         }
-        if ($bidTimeDiff <= 30) {
-            $endTime = $bidTime->addSeconds(32); // Set the end time to 30 seconds from the current bid time
+        if ($bidTimeDiff <= $product->reset_time) {
+            $endTime = $bidTime->addSeconds($product->reset_time + 2); // Set the end time to 30 seconds from the current bid time
         }
 
         // Place the bid and update the end time
@@ -61,6 +65,7 @@ class BidController extends Controller
         // Update the product's end time
         $product->end_time = $endTime;
         $product->save();
+
 
         return response()->json(['message' => 'Bid placed successfully']);
     }

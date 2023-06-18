@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
+use App\Models\Shipment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,8 +58,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->new_password);
             $user->save();
             return back()->with('success', 'Password updated successfully');
-        }
-        else {
+        } else {
             return back()->withErrors('Wrong password');
         }
     }
@@ -69,9 +70,25 @@ class UserController extends Controller
             $user = User::findOrFail(auth()->id()); // Retrieve the user by ID
 
             $user->reports()->delete();
+            $user->watchlist()->delete();
             $user->sentChats()->delete();
             $user->receivedChats()->delete();
-            $user->transactions()->delete();
+
+            foreach ($user->sellerTransactions() as $tr) {
+                $payment = Payment::where('transaction_id', $tr->id)->firstOrFail();
+                $payment->remove();
+
+                $shipment = Shipment::where('transaction_id', $tr->id)->firstOrFail();
+                $shipment->remove();
+            }
+
+            foreach ($user->buyerTransactions() as $tr) {
+                $payment = Payment::where('transaction_id', $tr->id)->firstOrFail();
+                $payment->remove();
+
+                $shipment = Shipment::where('transaction_id', $tr->id)->firstOrFail();
+                $shipment->remove();
+            }
             $user->bids()->delete();
             $user->products()->delete(); // Delete the associated product list
             $user->withdrawHistories()->delete();
@@ -84,8 +101,7 @@ class UserController extends Controller
             // Perform any additional actions or redirect as needed
 
             return redirect('login')->withSuccess('User deleted successfully.');
-        }
-        else {
+        } else {
             return back()->withErrors('Wrong password');
         }
     }
