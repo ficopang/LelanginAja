@@ -3,7 +3,7 @@
 @section('custom-header')
     <style>
         .featured-categories .single-category img {
-            width: 40%;
+            width: 30%;
         }
 
         .hero-slider .single-slider img {

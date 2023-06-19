@@ -69,7 +69,7 @@
                                     <div class="mb-3">
                                         <label for="min-bid-increment" class="form-label">Minimum Bid Increment</label>
                                         <input type="number" class="form-control" id="min-bid-increment"
-                                            name="min-bid-increment" min="1" required step="1000">
+                                            name="min-bid-increment" min="1000" required step="1000">
                                     </div>
                                     <div class="mb-3">
                                         <label for="min-bid-users" class="form-label">Minimum Bid User(s)</label>
@@ -138,7 +138,7 @@
                                                     data-bs-target="#product-details-{{ $product->id }}"
                                                     class="accordion-toggle">
                                                     <div class="item-image">
-                                                        <img src="{{ asset('storage/' . $product->image_url) }}"
+                                                        <img src="{{ asset('storage' . $product->image_url) }}"
                                                             alt="{{ $product->name }}" class="object-fit-cover">
                                                         <div class="content">
                                                             <h3 class="title"><a
@@ -192,7 +192,7 @@
                                                     <li>Starting Price: Rp.{{ $product->starting_price }}</li>
                                                     <li>Min Bid Increment: Rp.{{ $product->min_bid_increment }}</li>
                                                     <li>Min User: {{ $product->min_bid_users }}</li>
-                                                    <li>Image: <img src="{{ asset('storage/' . $product->image_url) }}"
+                                                    <li>Image: <img src="{{ asset('storage' . $product->image_url) }}"
                                                             alt="{{ $product->name }}" width="100"></li>
                                                     <li>Reset Time: {{ $product->reset_time }} second(s)</li>
                                                     <li>Start Time: {{ $product->start_time }}</li>

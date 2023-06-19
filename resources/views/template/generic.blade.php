@@ -100,7 +100,7 @@
                                                         <div class="cart-img-head">
                                                             <a class="cart-img"
                                                                 href="/product/{{ $watchlistItem->product->id }}"><img
-                                                                    src="{{ asset('storage/' . $watchlistItem->product->image_url) }}"
+                                                                    src="{{ asset('storage' . $watchlistItem->product->image_url) }}"
                                                                     alt="#"></a>
                                                         </div>
 
@@ -133,7 +133,7 @@
                                                     <li>
                                                         <div class="cart-img-head">
                                                             <a class="cart-img" href="/product/{{ $product->id }}"><img
-                                                                    src="{{ asset('storage/' . $product->image_url) }}"
+                                                                    src="{{ asset('storage' . $product->image_url) }}"
                                                                     alt="#"></a>
                                                         </div>
 
@@ -161,12 +161,10 @@
                                     </div>
                                 </div>
                             @else
-                                <div class="nav-hotline">
-                                    <div class="button">
+                                <div class="navbar-cart ms-auto">
+                                    <div class="button me-2 d-sm-none d-lg-block">
                                         <a href="/register" class="btn">Register</a>
                                     </div>
-                                </div>
-                                <div class="navbar-cart">
                                     <div class="button">
                                         <a href="/login" class="btn">Login</a>
                                     </div>

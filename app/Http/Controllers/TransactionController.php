@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    public function showTransactionHistory(){
+    public function showTransactionHistory()
+    {
         $id = Auth::user()->id;
         $userTransactions = Transaction::where('buyer_id', $id)->get();
         return view('transaction.history', compact('userTransactions'));
     }
 
-    public function checkoutPage() {
+    public function checkoutPage()
+    {
         $userId = auth()->id();
         $wonProducts = Product::whereHas('bids', function ($query) use ($userId) {
             $query->where('user_id', $userId);
@@ -35,7 +37,8 @@ class TransactionController extends Controller
         return view('product.checkout', compact('wonProducts', 'totalBidAmount'));
     }
 
-    public function saveShippingAddres(Request $request){
+    public function saveShippingAddres(Request $request)
+    {
         $user = User::find(auth()->id());
         $userId = auth()->id();
         $wonProducts = Product::whereHas('bids', function ($query) use ($userId) {
@@ -45,7 +48,7 @@ class TransactionController extends Controller
             ->where('end_time', '<', Carbon::now()->addHours(7))
             ->get();
 
-            // dd($wonProducts);
+        // dd($wonProducts);
 
         $firstName = $request->firstName;
         $lastName = $request->lastName;
@@ -80,7 +83,7 @@ class TransactionController extends Controller
             'cvc' => 'required|integer|between:100,999'
         ]);
 
-        foreach($wonProducts as $product){
+        foreach ($wonProducts as $product) {
             $transaction = new Transaction();
             $transaction->buyer_id = $user->id;
             $transaction->seller_id = $product->user_id;
@@ -112,6 +115,6 @@ class TransactionController extends Controller
             $payments->cvc = $cvc;
             $payments->save();
         }
-        return view('product.checkout');
+        return route('transaction.history');
     }
 }

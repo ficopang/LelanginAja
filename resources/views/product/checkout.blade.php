@@ -176,7 +176,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="single-form form-default button">
-                                                        <<button type="submit" class="btn btn-primary">Pay Now</button>
+                                                        <button type="submit" class="btn btn-primary">Pay Now</button>
                                                     </div>
                                                 </div>
                                             </div>
