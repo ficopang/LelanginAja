@@ -41,7 +41,7 @@
             </div>
             <div class="mb-3">
                 <label for="min-bid-increment" class="form-label">Minimum Bid Increment</label>
-                <input type="number" min="1" class="form-control" id="min-bid-increment" name="min-bid-increment"
+                <input type="number" min="1000" class="form-control" id="min-bid-increment" name="min-bid-increment"
                     value="{{ $product->min_bid_increment }}" required step="1000">
             </div>
             <div class="mb-3">

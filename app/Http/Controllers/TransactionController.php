@@ -115,6 +115,6 @@ class TransactionController extends Controller
             $payments->cvc = $cvc;
             $payments->save();
         }
-        return route('transaction.history');
+        return redirect()->route('transaction.history');
     }
 }

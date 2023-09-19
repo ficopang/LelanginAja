@@ -110,7 +110,7 @@ class ProductController extends Controller
         if ($request->hasFile('product-image')) {
             $image = $request->file('product-image');
             $imagePath = $image->store('product-images', 'public');
-            $products->image_url = $imagePath;
+            $products->image_url = "/" . $imagePath;
         }
         $products->reset_time = $validatedData['reset-time'];
         $products->start_time = $validatedData['start-time'];
@@ -149,7 +149,7 @@ class ProductController extends Controller
         if ($request->hasFile('product-image')) {
             $image = $request->file('product-image');
             $imagePath = $image->store('product-images', 'public');
-            $product->image_url = $imagePath;
+            $product->image_url = "/" . $imagePath;
         }
         $product->reset_time = $validatedData['reset-time'];
         $product->start_time = $validatedData['start-time'];
